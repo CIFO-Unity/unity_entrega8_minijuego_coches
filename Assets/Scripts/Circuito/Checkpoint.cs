@@ -6,6 +6,7 @@ public class Checkpoint : MonoBehaviour
     [Header("References")]
     [SerializeField] private StopwatchTimer stopwatchTimer;   // Referencia al cronómetro
     [SerializeField] private TextMeshProUGUI checkpointTimeText; // Texto donde mostrar el tiempo
+    [SerializeField] private CheckpointCounter checkpointCounter;
 
     [Header("Settings")]
     [SerializeField] private string playerTag = "Player";     // Tag del jugador
@@ -40,6 +41,9 @@ public class Checkpoint : MonoBehaviour
                 checkpointTimeText.text = formattedTime;
             else
                 Debug.LogWarning("No se ha asignado el TextMeshProUGUI del checkpoint.");
+
+            if (checkpointCounter != null)
+                checkpointCounter.AddCheckpoint();
         }
     }
 }

@@ -505,6 +505,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stopwatchTimer: {fileID: 1685457969}
   checkpointTimeText: {fileID: 1206985522}
+  checkpointCounter: {fileID: 2125572641}
   playerTag: Player
 --- !u!1 &405908930
 GameObject:
@@ -2784,6 +2785,9 @@ PrefabInstance:
       addedObject: {fileID: 2125572640}
     - targetCorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
       insertIndex: -1
+      addedObject: {fileID: 2125572641}
+    - targetCorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+      insertIndex: -1
       addedObject: {fileID: 2125572639}
   m_SourcePrefab: {fileID: 100100000, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
 --- !u!1 &1685457966
@@ -2916,6 +2920,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stopwatchTimer: {fileID: 1685457969}
   checkpointTimeText: {fileID: 1130725619}
+  checkpointCounter: {fileID: 2125572641}
   playerTag: Player
 --- !u!1 &1886041307
 GameObject:
@@ -3160,6 +3165,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   stopwatchTimer: {fileID: 1685457969}
   checkpointTimeText: {fileID: 405908932}
+  checkpointCounter: {fileID: 2125572641}
   playerTag: Player
 --- !u!1 &2029156570
 GameObject:
@@ -3618,6 +3624,20 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carController: {fileID: 2125572637}
+--- !u!114 &2125572641
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 669483250}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 029572f17ecac4fab850801d287557b0, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  checkpointCount: 0
+  stopper: {fileID: 817389985}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
