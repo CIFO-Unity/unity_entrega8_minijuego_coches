@@ -27,8 +27,7 @@ public class CountdownTimer : MonoBehaviour
         timerText.text = currentTime.ToString();
 
         // Reproducir sonido usando SoundManager
-        if (!string.IsNullOrEmpty(@"3-2-1-Go"))
-            SoundManager.SafePlaySound("3-2-1-Go");
+        SoundManager.SafePlaySound("3-2-1-Go");
 
         StartCoroutine(Countdown());
     }
@@ -48,5 +47,9 @@ public class CountdownTimer : MonoBehaviour
         // Esperar 1 segundo antes de ocultarlo
         yield return new WaitForSeconds(1f);
         timerText.text = "";
+
+        // Reproducir música de fondo usando SoundManager
+        SoundManager.SafePlayBackgroundMusic("Nightcall");
+
     }
 }
