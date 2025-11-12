@@ -58,4 +58,9 @@ public class StopwatchTimer : MonoBehaviour
         elapsedTime = 0f;
         isRunning = false;
     }
+
+    public float GetElapsedTime()
+    {
+        return elapsedTime;
+    }
 }

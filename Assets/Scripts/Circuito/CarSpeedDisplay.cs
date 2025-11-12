@@ -41,7 +41,7 @@ public class CarSpeedDisplay : MonoBehaviour
             if (speed < 0)
                 speed = 0;
 
-            speedText.text = $"{speed:0} km/h";
+            speedText.text = $"{speed:0}  km/h";
         }
     }
 }
