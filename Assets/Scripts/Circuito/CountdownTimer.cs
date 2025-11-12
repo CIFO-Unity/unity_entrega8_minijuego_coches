@@ -16,6 +16,10 @@ public class CountdownTimer : MonoBehaviour
     [Header("Stopwatch")]
     private StopwatchTimer stopwatchTimer;      // Referencia al cronómetro
 
+    [SerializeField]
+    [Header("Car Controller Activator")]
+    private CarControllerActivator carControllerActivator;
+
     private int currentTime;
 
     void Start()
@@ -54,6 +58,10 @@ public class CountdownTimer : MonoBehaviour
         // Reproducir música de fondo usando SoundManager
         SoundManager.SafePlayBackgroundMusic("Nightcall");
 
-        stopwatchTimer.StartTimer();
+        if (stopwatchTimer != null)
+            stopwatchTimer.StartTimer();
+
+        if (carControllerActivator != null)
+            carControllerActivator.ActivateCarControl();
     }
 }
