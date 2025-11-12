@@ -5,13 +5,16 @@ using System.Collections;
 public class CountdownTimer : MonoBehaviour
 {
     [Header("UI Settings")]
-    public TextMeshProUGUI timerText;  // Texto donde se mostrará la cuenta atrás
+    [SerializeField]
+    private TextMeshProUGUI timerText;  // Texto donde se mostrará la cuenta atrás
 
     [Header("Countdown Settings")]
-    public int startTime = 10;         // Tiempo inicial en segundos
+    [SerializeField]
+    private int startTime = 10;         // Tiempo inicial en segundos
 
-    [Header("SFX Settings")]
-    //public string sfxNameForThree = "Beep"; // Nombre del efecto de sonido en SoundManager/SFX
+    [SerializeField]
+    [Header("Stopwatch")]
+    private StopwatchTimer stopwatchTimer;      // Referencia al cronómetro
 
     private int currentTime;
 
@@ -51,5 +54,6 @@ public class CountdownTimer : MonoBehaviour
         // Reproducir música de fondo usando SoundManager
         SoundManager.SafePlayBackgroundMusic("Nightcall");
 
+        stopwatchTimer.StartTimer();
     }
 }
