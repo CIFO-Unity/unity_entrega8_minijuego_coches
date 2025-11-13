@@ -4040,6 +4040,7 @@ GameObject:
   - component: {fileID: 1685457967}
   - component: {fileID: 1685457969}
   - component: {fileID: 1685457970}
+  - component: {fileID: 1685457971}
   m_Layer: 0
   m_Name: SceneController
   m_TagString: Untagged
@@ -4111,6 +4112,20 @@ MonoBehaviour:
   restartButton: {fileID: 1917291876}
   exitButton: {fileID: 825695912}
   canPause: 0
+--- !u!114 &1685457971
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1685457966}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d6202ddb8ff4ad684aa664a999214d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carGhost: {fileID: 8417875695730153773}
+  carRecorder: {fileID: 2125572647}
 --- !u!1 &1686067111
 GameObject:
   m_ObjectHideFlags: 0
@@ -5294,6 +5309,10 @@ PrefabInstance:
       propertyPath: stopper
       value: 
       objectReference: {fileID: 817389985}
+    - target: {fileID: 2799828979944754173, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5362235511502728187, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
       propertyPath: m_Enabled
       value: 1
@@ -5308,7 +5327,7 @@ PrefabInstance:
       objectReference: {fileID: 177168441}
     - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
       propertyPath: m_LocalPosition.x
-      value: 13.5
+      value: 13.52
       objectReference: {fileID: 0}
     - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
       propertyPath: m_LocalPosition.y
@@ -5316,7 +5335,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
       propertyPath: m_LocalPosition.z
-      value: -65.53
+      value: -67.57
       objectReference: {fileID: 0}
     - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
       propertyPath: m_LocalRotation.w
@@ -5371,6 +5390,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   playbackSpeed: 1
+  recordEveryXFrames: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

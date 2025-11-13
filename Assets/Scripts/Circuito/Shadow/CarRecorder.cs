@@ -39,9 +39,6 @@ public class CarRecorder : MonoBehaviour
         elapsedTime = 0f;
         isRecording = true;
         Debug.Log("Grabación iniciada");
-
-                Debug.Log("El archivo se guarda en: " + Application.persistentDataPath);
-
     }
 
     public void StopRecording(float totalTime)

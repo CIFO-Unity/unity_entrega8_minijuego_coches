@@ -64,7 +64,7 @@ public class CarPlayback : MonoBehaviour
     {
         if (recording == null || recording.frames.Count == 0)
         {
-            gameObject.SetActive(false); // no hay grabación
+            //gameObject.SetActive(false); // no hay grabación
             return;
         }
 
@@ -80,7 +80,7 @@ public class CarPlayback : MonoBehaviour
         currentIndex = 0;
         playbackTimer = 0f;
         isPlaying = true;
-        gameObject.SetActive(true);
+        //gameObject.SetActive(true);
     }
 
     public void StopPlayback()
