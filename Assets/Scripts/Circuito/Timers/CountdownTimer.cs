@@ -38,7 +38,8 @@ public class CountdownTimer : MonoBehaviour
         timerText.text = currentTime.ToString();
 
         // Reproducir sonido usando SoundManager
-        SoundManager.SafePlaySound("3-2-1-Go");
+        //SoundManager.SafePlaySound("3-2-1-Go");
+        SoundManager.SafePlaySound("Three");
 
         StartCoroutine(Countdown());
     }
@@ -47,9 +48,24 @@ public class CountdownTimer : MonoBehaviour
     {
         while (currentTime > 0)
         {
+            // Reproducir sonido correspondiente al número
+            switch (currentTime)
+            {
+                case 3:
+                    SoundManager.SafePlaySound("Three");
+                    break;
+                case 2:
+                    SoundManager.SafePlaySound("Two");
+                    break;
+                case 1:
+                    SoundManager.SafePlaySound("One");
+                    break;
+            }
+
+            timerText.text = currentTime.ToString();
+
             yield return new WaitForSeconds(1f);
             currentTime--;
-            timerText.text = currentTime.ToString();
         }
 
         // Cuando llegue a 0, mostrar "Go!"

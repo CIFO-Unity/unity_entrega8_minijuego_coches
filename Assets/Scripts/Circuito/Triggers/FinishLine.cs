@@ -124,6 +124,9 @@ public class FinishLine : MonoBehaviour
             
             if (panelPauseScript != null)
             {
+                // Evitar que el usuario abra el menú de Pausa cuando se ha acabado la carrera
+                panelPauseScript.canPause = false;
+
                 // Iniciar la corutina que lo activará después del delay
                 StartCoroutine(ActivatePausePanelAfterDelay());
             }

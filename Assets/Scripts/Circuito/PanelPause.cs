@@ -51,6 +51,8 @@ public class PanelPause : MonoBehaviour
 
         Time.timeScale = 0f; // Pausar el juego
         isPaused = true;
+
+        SoundManager.SafeLowerBackgroundMusicVolume();
     }
 
     private void ResumeGame()
@@ -60,6 +62,8 @@ public class PanelPause : MonoBehaviour
 
         Time.timeScale = 1f; // Reanudar el juego
         isPaused = false;
+
+        SoundManager.SafeRestoreBackgroundMusicVolume();
     }
 
     private void RestartScene()

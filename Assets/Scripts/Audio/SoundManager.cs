@@ -10,6 +10,8 @@ public class SoundManager : MonoBehaviour
 
     private AudioSource currentMusicSource;
 
+    private float originalMusicVolume = 1f; // Guardar volumen original
+
 
     #region Awake
 
@@ -177,7 +179,7 @@ public class SoundManager : MonoBehaviour
 
         Instance.PlayBackgroundMusic(musicName);
     }
-    
+
     public static void SafeStopBackgroundMusic()
     {
         if (Instance == null)
@@ -187,6 +189,35 @@ public class SoundManager : MonoBehaviour
         }
 
         Instance.StopBackgroundMusic();
+    }
+    
+    public static void SafeLowerBackgroundMusicVolume()
+    {
+        if (Instance == null)
+        {
+            Debug.LogWarning("SoundManager not initialized. Cannot lower background music volume.");
+            return;
+        }
+
+        if (Instance.currentMusicSource != null)
+        {
+            Instance.originalMusicVolume = Instance.currentMusicSource.volume;
+            Instance.currentMusicSource.volume = Instance.currentMusicSource.volume * 0.5f;
+        }
+    }
+
+    public static void SafeRestoreBackgroundMusicVolume()
+    {
+        if (Instance == null)
+        {
+            Debug.LogWarning("SoundManager not initialized. Cannot restore background music volume.");
+            return;
+        }
+
+        if (Instance.currentMusicSource != null)
+        {
+            Instance.currentMusicSource.volume = Instance.originalMusicVolume;
+        }
     }
 
     public static void SafePlaySound(string sfxName)
