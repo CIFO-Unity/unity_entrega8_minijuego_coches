@@ -81,9 +81,6 @@ public class FinishLine : MonoBehaviour
                         StartCoroutine(FadeInPanel(finishPanel, fadeDuration, targetAlpha));
                     }
 
-                    // Fade out de la música de fondo
-                    StartCoroutine(SoundManager.Instance.FadeOutMusic(fadeDuration));
-
                     // Guardar el tiempo sólo si es mejor que el ya guardado
                     BestTimeManager.SaveBestTime(stopwatchTimer.GetElapsedTime());
 
@@ -139,6 +136,10 @@ public class FinishLine : MonoBehaviour
                         // Iniciar la corutina que lo activará después del delay
                         StartCoroutine(ActivatePausePanelAfterDelay());
                     }
+
+                    // Fade out de la música de fondo
+                    if (SoundManager.Instance != null)
+                        StartCoroutine(SoundManager.Instance.FadeOutMusic(fadeDuration));
 
                     Debug.Log("¡Meta alcanzada! Cronómetro detenido y vehículo parado.");
                 }

@@ -117,14 +117,40 @@ public class SoundManager : MonoBehaviour
 
     public IEnumerator FadeOutMusic(float duration = 1.5f)
     {
-        if (currentMusicSource == null || !currentMusicSource.isPlaying)
+        if (currentMusicSource == null)
+        {
+            Debug.LogWarning("FadeOutMusic: currentMusicSource is null.");
             yield break;
+        }
+
+        if (!currentMusicSource.isPlaying)
+        {
+            yield break;
+        }
+
+        if (currentMusicSource.clip == null)
+        {
+            Debug.LogWarning("FadeOutMusic: currentMusicSource.clip is null.");
+            yield break;
+        }
+
+        if (duration <= 0f)
+        {
+            Debug.LogWarning("FadeOutMusic: duration must be greater than 0. Stopping immediately.");
+            currentMusicSource.Stop();
+            yield break;
+        }
 
         float startVolume = currentMusicSource.volume;
 
         while (currentMusicSource.volume > 0f)
         {
             currentMusicSource.volume -= startVolume * Time.deltaTime / duration;
+
+            // Evitar que el volumen sea negativo
+            if (currentMusicSource.volume < 0f)
+                currentMusicSource.volume = 0f;
+
             yield return null;
         }
 
