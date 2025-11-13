@@ -12,7 +12,8 @@ public class FinishLine : MonoBehaviour
     [SerializeField] private Image finishPanel;              // Panel que se desvanecerá al llegar a meta
     [SerializeField] private TextMeshProUGUI textYourTime;
     [SerializeField] private TextMeshProUGUI textBestTime; 
-    [SerializeField] private GameObject finishPause;
+    [SerializeField] private PanelPause panelPauseScript; // Referencia al script PanelPause
+    [SerializeField] private float delayPanelPause = 5f; // Segundos antes de mostrar el panel
 
 
     [Header("Fade Settings")]
@@ -110,7 +111,7 @@ public class FinishLine : MonoBehaviour
                     textBestTime.gameObject.SetActive(true);
 
                     // Hacer que parpadee si se ha conseguido un nuevo récord
-                    if(stopwatchTimer.GetElapsedTime() <= bestTime)
+                    if (stopwatchTimer.GetElapsedTime() <= bestTime)
                         StartCoroutine(BlinkCoroutine());
                 }
                 else
@@ -119,6 +120,12 @@ public class FinishLine : MonoBehaviour
                     textBestTime.text = "Best time: --:--:--";
                     textBestTime.gameObject.SetActive(true);
                 }
+            }
+            
+            if (panelPauseScript != null)
+            {
+                // Iniciar la corutina que lo activará después del delay
+                StartCoroutine(ActivatePausePanelAfterDelay());
             }
 
             Debug.Log("¡Meta alcanzada! Cronómetro detenido y vehículo parado.");
@@ -160,5 +167,14 @@ public class FinishLine : MonoBehaviour
 
         // Asegurarse de que el texto vuelve al color original
         textBestTime.color = originalColor;
+    }
+
+    private IEnumerator ActivatePausePanelAfterDelay()
+    {
+        yield return new WaitForSeconds(delayPanelPause);
+
+        // Activar panel y ocultar el botón Play
+        panelPauseScript.HidePlayButton();
+        panelPauseScript.PauseGame();
     }
 }

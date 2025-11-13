@@ -456,7 +456,8 @@ MonoBehaviour:
   finishPanel: {fileID: 1528382423}
   textYourTime: {fileID: 1207568417}
   textBestTime: {fileID: 880278251}
-  finishPause: {fileID: 0}
+  panelPauseScript: {fileID: 1685457970}
+  delayPanelPause: 5
   fadeDuration: 2
   targetAlpha: 1
   blinkColor: {r: 1, g: 0, b: 0, a: 1}

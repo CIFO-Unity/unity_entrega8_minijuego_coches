@@ -44,7 +44,7 @@ public class PanelPause : MonoBehaviour
         }
     }
 
-    private void PauseGame()
+    public void PauseGame()
     {
         if (panel != null)
             panel.SetActive(true);
@@ -74,5 +74,11 @@ public class PanelPause : MonoBehaviour
         SoundManager.SafeStopBackgroundMusic();
         Time.timeScale = 1f; // Asegurarse de que el tiempo vuelva a la normalidad
         SceneManager.LoadScene("MainMenu"); // Nombre de tu escena de menú
+    }
+
+    public void HidePlayButton()
+    {
+        if (playButton != null)
+            playButton.gameObject.SetActive(false);
     }
 }
