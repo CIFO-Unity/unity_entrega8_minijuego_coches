@@ -25,6 +25,11 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField] private GameObject yellowLight;
     [SerializeField] private GameObject greenLight;
 
+    [Header("Audio Clips for Lights")]
+    [SerializeField] private string redLightSound = "Three";
+    [SerializeField] private string yellowLightSound = "Two";
+    [SerializeField] private string greenLightSound = "One";
+
     [Header("Countdown Settings")]
     [SerializeField] private float interval = 1f; // segundos entre cada luz
 
@@ -39,23 +44,34 @@ public class CountdownTimer : MonoBehaviour
 
     private IEnumerator CountdownSequence()
     {
-        // 1️⃣ Encender rojas
+        // Esperar 1 segundo antes de encender la primera luz
+        yield return new WaitForSeconds(1f);
+
+        // 1️⃣ Encender rojas y reproducir sonido
         ActivateRed();
+        if (SoundManager.Instance != null)
+            SoundManager.SafePlaySound(redLightSound);
+
         yield return new WaitForSeconds(interval);
 
-        // 2️⃣ Encender amarillas (rojas permanecen)
+        // 2️⃣ Encender amarillas (rojas permanecen) y reproducir sonido
         ActivateYellow();
+        if (SoundManager.Instance != null)
+            SoundManager.SafePlaySound(yellowLightSound);
+
         yield return new WaitForSeconds(interval);
 
-        // 3️⃣ Encender verdes (rojas y amarillas permanecen)
+        // 3️⃣ Encender verdes (rojas y amarillas permanecen) y reproducir sonido
         ActivateGreen();
+        if (SoundManager.Instance != null)
+            SoundManager.SafePlaySound(greenLightSound);
 
         // Mostrar "Go!" en el UI
-        if (timerText != null)
+        /*if (timerText != null)
         {
             timerText.gameObject.SetActive(true);
             timerText.text = "Go!";
-        }
+        }*/
 
         // Permitir que el jugador se mueva
         carControllerActivator?.ActivateCarControl();
@@ -74,6 +90,11 @@ public class CountdownTimer : MonoBehaviour
         CarRecording recording = carRecorder?.LoadRecording();
         if (recording != null)
             carGhost.StartPlayback(recording);
+
+        // Esperar 1 segundo antes de empezar la música de fondo
+        yield return new WaitForSeconds(0.5f);
+        if (SoundManager.Instance != null)
+            SoundManager.SafePlayBackgroundMusic("Nightcall");
 
         // Esperar un segundo antes de ocultar el texto
         yield return new WaitForSeconds(1f);
