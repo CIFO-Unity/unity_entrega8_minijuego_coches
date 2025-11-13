@@ -14,7 +14,7 @@ OcclusionCullingSettings:
 RenderSettings:
   m_ObjectHideFlags: 0
   serializedVersion: 10
-  m_Fog: 0
+  m_Fog: 1
   m_FogColor: {r: 0.78431374, g: 0.21176471, b: 0.5882353, a: 1}
   m_FogMode: 1
   m_FogDensity: 0.04
@@ -1081,6 +1081,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 658527379}
   m_CullTransparentMesh: 1
+--- !u!1 &700335843 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4861505289892839717, guid: a085054cb4ec66545ae092071b74dc84, type: 3}
+  m_PrefabInstance: {fileID: 1306959696}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &817389985
 GameObject:
   m_ObjectHideFlags: 0
@@ -1255,6 +1260,11 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 825695910}
   m_CullTransparentMesh: 1
+--- !u!1 &863860941 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 5357936809805104311, guid: a085054cb4ec66545ae092071b74dc84, type: 3}
+  m_PrefabInstance: {fileID: 1306959696}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &879892632
 GameObject:
   m_ObjectHideFlags: 0
@@ -2351,6 +2361,10 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 844731616916348639, guid: a085054cb4ec66545ae092071b74dc84, type: 3}
+      propertyPath: m_IsActive
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 5733372183027801137, guid: a085054cb4ec66545ae092071b74dc84, type: 3}
       propertyPath: m_LocalPosition.y
       value: -0
@@ -2408,6 +2422,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: a085054cb4ec66545ae092071b74dc84, type: 3}
+--- !u!1 &1306959697 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 844731616916348639, guid: a085054cb4ec66545ae092071b74dc84, type: 3}
+  m_PrefabInstance: {fileID: 1306959696}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1349242039
 GameObject:
   m_ObjectHideFlags: 0
@@ -2533,6 +2552,11 @@ MonoBehaviour:
 GameObject:
   m_CorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
   m_PrefabInstance: {fileID: 1655623745}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1473685197 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 2991558425006025713, guid: a085054cb4ec66545ae092071b74dc84, type: 3}
+  m_PrefabInstance: {fileID: 1306959696}
   m_PrefabAsset: {fileID: 0}
 --- !u!1 &1480377163
 GameObject:
@@ -3027,6 +3051,10 @@ PrefabInstance:
       propertyPath: stopper
       value: 
       objectReference: {fileID: 817389985}
+    - target: {fileID: 8417875694694430856, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+      propertyPath: finishBanner
+      value: 
+      objectReference: {fileID: 1306959697}
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
@@ -3068,12 +3096,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   timerText: {fileID: 2053450628}
-  startTime: 3
   stopwatchTimer: {fileID: 1685457969}
   carControllerActivator: {fileID: 2125572640}
   panelPause: {fileID: 1685457970}
   carRecorder: {fileID: 2125572647}
   carGhost: {fileID: 8417875695730153773}
+  redLight: {fileID: 700335843}
+  yellowLight: {fileID: 1473685197}
+  greenLight: {fileID: 863860941}
+  interval: 1
 --- !u!4 &1685457968
 Transform:
   m_ObjectHideFlags: 0
@@ -4008,7 +4039,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 1
+  m_IsActive: 0
 --- !u!224 &2053450627
 RectTransform:
   m_ObjectHideFlags: 0

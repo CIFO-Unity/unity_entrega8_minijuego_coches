@@ -4,6 +4,7 @@ public class CheckpointCounter : MonoBehaviour
 {
     [SerializeField] private int checkpointCount = 0; // Contador interno
     [SerializeField] private GameObject stopper;
+    [SerializeField] private GameObject finishBanner;
 
     /// <summary>
     /// Aumenta el contador de checkpoints en 1.
@@ -17,6 +18,9 @@ public class CheckpointCounter : MonoBehaviour
         {
             if (stopper != null)
                 stopper.SetActive(false);
+
+            if(finishBanner != null)
+                finishBanner.SetActive(true);
         }
     }
 

@@ -5,106 +5,108 @@ using System.Collections;
 public class CountdownTimer : MonoBehaviour
 {
     [Header("UI Settings")]
-    [SerializeField]
-    private TextMeshProUGUI timerText;  // Texto donde se mostrará la cuenta atrás
-
-    [Header("Countdown Settings")]
-    [SerializeField]
-    private int startTime = 10;         // Tiempo inicial en segundos
+    [SerializeField] private TextMeshProUGUI timerText;
 
     [Header("Stopwatch")]
-    [SerializeField]
-    private StopwatchTimer stopwatchTimer;      // Referencia al cronómetro
+    [SerializeField] private StopwatchTimer stopwatchTimer;
 
     [Header("Car Controller Activator")]
-    [SerializeField]
-    private CarControllerActivator carControllerActivator;
+    [SerializeField] private CarControllerActivator carControllerActivator;
 
     [Header("Panel Pause")]
-    [SerializeField]
-    private PanelPause panelPause;
+    [SerializeField] private PanelPause panelPause;
 
-    [Header("Car Recorder")]
-    [SerializeField]
-    private CarRecorder carRecorder;
-    [SerializeField]
-    private CarPlayback carGhost;
+    [Header("Car Recorder & Ghost")]
+    [SerializeField] private CarRecorder carRecorder;
+    [SerializeField] private CarPlayback carGhost;
 
-    private int currentTime;
+    [Header("Traffic Lights")]
+    [SerializeField] private GameObject redLight;
+    [SerializeField] private GameObject yellowLight;
+    [SerializeField] private GameObject greenLight;
+
+    [Header("Countdown Settings")]
+    [SerializeField] private float interval = 1f; // segundos entre cada luz
 
     void Start()
     {
-        if (timerText == null)
-        {
-            Debug.LogError("No se ha asignado TextMeshProUGUI en el inspector.");
-            return;
-        }
+        // Apagar todas las luces al inicio
+        SetAllLights(false);
 
-        currentTime = startTime;
-        timerText.text = currentTime.ToString();
-
-        // Reproducir sonido usando SoundManager
-        //SoundManager.SafePlaySound("3-2-1-Go");
-        if (SoundManager.Instance != null)
-            SoundManager.SafePlaySound("Three");
-
-        StartCoroutine(Countdown());
+        // Iniciar la secuencia del semáforo
+        StartCoroutine(CountdownSequence());
     }
 
-    private IEnumerator Countdown()
+    private IEnumerator CountdownSequence()
     {
-        while (currentTime > 0)
+        // 1️⃣ Encender rojas
+        ActivateRed();
+        yield return new WaitForSeconds(interval);
+
+        // 2️⃣ Encender amarillas (rojas permanecen)
+        ActivateYellow();
+        yield return new WaitForSeconds(interval);
+
+        // 3️⃣ Encender verdes (rojas y amarillas permanecen)
+        ActivateGreen();
+
+        // Mostrar "Go!" en el UI
+        if (timerText != null)
         {
-            // Reproducir sonido correspondiente al número
-            switch (currentTime)
-            {
-                case 3:
-                    if (SoundManager.Instance != null)
-                        SoundManager.SafePlaySound("Three");
-                    break;
-                case 2:
-                    if (SoundManager.Instance != null)
-                        SoundManager.SafePlaySound("Two");
-                    break;
-                case 1:
-                    if (SoundManager.Instance != null)
-                        SoundManager.SafePlaySound("One");
-                    break;
-            }
-
-            timerText.text = currentTime.ToString();
-
-            yield return new WaitForSeconds(1f);
-            currentTime--;
+            timerText.gameObject.SetActive(true);
+            timerText.text = "Go!";
         }
 
-        // Cuando llegue a 0, mostrar "Go!"
-        timerText.text = "Go!";
+        // Permitir que el jugador se mueva
+        carControllerActivator?.ActivateCarControl();
 
-        // Esperar 1 segundo antes de ocultarlo
-        yield return new WaitForSeconds(1f);
-        timerText.text = "";
+        // Iniciar cronómetro
+        stopwatchTimer?.StartTimer();
 
-        // Reproducir música de fondo usando SoundManager
-        if (SoundManager.Instance != null)
-            SoundManager.SafePlayBackgroundMusic("Nightcall");
-
-        if (stopwatchTimer != null)
-            stopwatchTimer.StartTimer();
-
-        if (carControllerActivator != null)
-            carControllerActivator.ActivateCarControl();
-
-        // Permitir acceder el menú de pausa
+        // Permitir menú de pausa
         if (panelPause != null)
             panelPause.canPause = true;
 
-        // Empezar a grabar el movimiento del coche
-        if (carRecorder != null)
-            carRecorder.StartRecording();
+        // Empezar a grabar el coche del jugador
+        carRecorder?.StartRecording();
 
-        // Reproducir el coche fantasma
-        CarRecording recording = carRecorder.LoadRecording();
-        carGhost.StartPlayback(recording);
+        // Reproducir el coche fantasma si hay grabación previa
+        CarRecording recording = carRecorder?.LoadRecording();
+        if (recording != null)
+            carGhost.StartPlayback(recording);
+
+        // Esperar un segundo antes de ocultar el texto
+        yield return new WaitForSeconds(1f);
+        if (timerText != null)
+            timerText.text = "";
+    }
+
+    // --- Métodos auxiliares para luces ---
+    private void SetAllLights(bool state)
+    {
+        if (redLight != null) redLight.SetActive(state);
+        if (yellowLight != null) yellowLight.SetActive(state);
+        if (greenLight != null) greenLight.SetActive(state);
+    }
+
+    private void ActivateRed()
+    {
+        if (redLight != null) redLight.SetActive(true);
+        if (yellowLight != null) yellowLight.SetActive(false);
+        if (greenLight != null) greenLight.SetActive(false);
+    }
+
+    private void ActivateYellow()
+    {
+        if (redLight != null) redLight.SetActive(true);
+        if (yellowLight != null) yellowLight.SetActive(true);
+        if (greenLight != null) greenLight.SetActive(false);
+    }
+
+    private void ActivateGreen()
+    {
+        if (redLight != null) redLight.SetActive(true);
+        if (yellowLight != null) yellowLight.SetActive(true);
+        if (greenLight != null) greenLight.SetActive(true);
     }
 }
