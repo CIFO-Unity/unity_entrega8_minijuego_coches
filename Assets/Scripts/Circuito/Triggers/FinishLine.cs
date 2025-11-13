@@ -59,7 +59,10 @@ public class FinishLine : MonoBehaviour
 
             // 4️⃣ Iniciar el fade del panel
             if (finishPanel != null)
+            {
+                finishPanel.gameObject.SetActive(true);
                 StartCoroutine(FadeInPanel(finishPanel, fadeDuration, targetAlpha));
+            }
 
             // Fade out de la música de fondo
             StartCoroutine(SoundManager.Instance.FadeOutMusic(fadeDuration));
