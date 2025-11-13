@@ -15,6 +15,7 @@ public class FinishLine : MonoBehaviour
     [SerializeField] private PanelPause panelPauseScript; // Referencia al script PanelPause
     [SerializeField] private float delayPanelPause = 5f; // Segundos antes de mostrar el panel
     [SerializeField] private CarRecorder carRecorder; 
+    [SerializeField] private CheckpointCounter checkPointCounter; 
 
 
     [Header("Fade Settings")]
@@ -50,92 +51,98 @@ public class FinishLine : MonoBehaviour
     {
         if (other.CompareTag(playerTag))
         {
-            // 1️⃣ Detener el cronómetro
-            if (stopwatchTimer != null)
-                stopwatchTimer.StopTimer();
-
-            if (carRecorder != null & stopwatchTimer != null)
-                carRecorder.StopRecording(stopwatchTimer.GetElapsedTime());
-
-            // 2️⃣ Detener el coche ajustando MaxSpeed a 0
-            PrometeoCarController carController = other.GetComponent<PrometeoCarController>();
-            if (carController != null)
+            if(checkPointCounter != null)
             {
-                carController.carSpeed = 0f;
-                carController.enabled = false;
-            }
-
-            // 3️⃣ Mostrar el mensaje de "Finish"
-            if (finishMessageUI != null)
-                finishMessageUI.SetActive(true);
-
-            // 4️⃣ Iniciar el fade del panel
-            if (finishPanel != null)
-            {
-                finishPanel.gameObject.SetActive(true);
-                StartCoroutine(FadeInPanel(finishPanel, fadeDuration, targetAlpha));
-            }
-
-            // Fade out de la música de fondo
-            StartCoroutine(SoundManager.Instance.FadeOutMusic(fadeDuration));
-
-            // Guardar el tiempo sólo si es mejor que el ya guardado
-            BestTimeManager.SaveBestTime(stopwatchTimer.GetElapsedTime());
-
-            // Mostrar tu tiempo
-            if (textYourTime != null && stopwatchTimer != null)
-            {
-                // Mostrar en el texto, formato mm:ss:ff (minutos:segundos:centésimas)
-                int minutes = Mathf.FloorToInt(stopwatchTimer.GetElapsedTime() / 60f);
-                int seconds = Mathf.FloorToInt(stopwatchTimer.GetElapsedTime() % 60f);
-                int hundredths = Mathf.FloorToInt((stopwatchTimer.GetElapsedTime() * 100) % 100);
-
-                textYourTime.text = string.Format("Your time: {0:00}:{1:00}:{2:00}", minutes, seconds, hundredths);
-
-                if (textYourTime != null)
-                    textYourTime.gameObject.SetActive(true);
-            }
-
-            // Mostrar mejor tiempo
-            if (textBestTime != null && stopwatchTimer != null)
-            {
-                float bestTime = BestTimeManager.GetBestTime();
-
-                // Verificar si hay un tiempo válido
-                if (bestTime != float.MaxValue)
+                if(checkPointCounter.GetCheckpointCount() >= 3)
                 {
-                    // Convertir a minutos, segundos y centésimas
-                    int minutes = Mathf.FloorToInt(bestTime / 60f);
-                    int seconds = Mathf.FloorToInt(bestTime % 60f);
-                    int hundredths = Mathf.FloorToInt((bestTime * 100) % 100);
+                    // 1️⃣ Detener el cronómetro
+                    if (stopwatchTimer != null)
+                        stopwatchTimer.StopTimer();
 
-                    textBestTime.text = string.Format("Best time: {0:00}:{1:00}:{2:00}", minutes, seconds, hundredths);
+                    if (carRecorder != null & stopwatchTimer != null)
+                        carRecorder.StopRecording(stopwatchTimer.GetElapsedTime());
 
-                    // Activar el texto si estaba oculto
-                    textBestTime.gameObject.SetActive(true);
+                    // 2️⃣ Detener el coche ajustando MaxSpeed a 0
+                    PrometeoCarController carController = other.GetComponent<PrometeoCarController>();
+                    if (carController != null)
+                    {
+                        carController.carSpeed = 0f;
+                        carController.enabled = false;
+                    }
 
-                    // Hacer que parpadee si se ha conseguido un nuevo récord
-                    if (stopwatchTimer.GetElapsedTime() <= bestTime)
-                        StartCoroutine(BlinkCoroutine());
-                }
-                else
-                {
-                    // No hay tiempo guardado todavía
-                    textBestTime.text = "Best time: --:--:--";
-                    textBestTime.gameObject.SetActive(true);
+                    // 3️⃣ Mostrar el mensaje de "Finish"
+                    if (finishMessageUI != null)
+                        finishMessageUI.SetActive(true);
+
+                    // 4️⃣ Iniciar el fade del panel
+                    if (finishPanel != null)
+                    {
+                        finishPanel.gameObject.SetActive(true);
+                        StartCoroutine(FadeInPanel(finishPanel, fadeDuration, targetAlpha));
+                    }
+
+                    // Fade out de la música de fondo
+                    StartCoroutine(SoundManager.Instance.FadeOutMusic(fadeDuration));
+
+                    // Guardar el tiempo sólo si es mejor que el ya guardado
+                    BestTimeManager.SaveBestTime(stopwatchTimer.GetElapsedTime());
+
+                    // Mostrar tu tiempo
+                    if (textYourTime != null && stopwatchTimer != null)
+                    {
+                        // Mostrar en el texto, formato mm:ss:ff (minutos:segundos:centésimas)
+                        int minutes = Mathf.FloorToInt(stopwatchTimer.GetElapsedTime() / 60f);
+                        int seconds = Mathf.FloorToInt(stopwatchTimer.GetElapsedTime() % 60f);
+                        int hundredths = Mathf.FloorToInt((stopwatchTimer.GetElapsedTime() * 100) % 100);
+
+                        textYourTime.text = string.Format("Your time: {0:00}:{1:00}:{2:00}", minutes, seconds, hundredths);
+
+                        if (textYourTime != null)
+                            textYourTime.gameObject.SetActive(true);
+                    }
+
+                    // Mostrar mejor tiempo
+                    if (textBestTime != null && stopwatchTimer != null)
+                    {
+                        float bestTime = BestTimeManager.GetBestTime();
+
+                        // Verificar si hay un tiempo válido
+                        if (bestTime != float.MaxValue)
+                        {
+                            // Convertir a minutos, segundos y centésimas
+                            int minutes = Mathf.FloorToInt(bestTime / 60f);
+                            int seconds = Mathf.FloorToInt(bestTime % 60f);
+                            int hundredths = Mathf.FloorToInt((bestTime * 100) % 100);
+
+                            textBestTime.text = string.Format("Best time: {0:00}:{1:00}:{2:00}", minutes, seconds, hundredths);
+
+                            // Activar el texto si estaba oculto
+                            textBestTime.gameObject.SetActive(true);
+
+                            // Hacer que parpadee si se ha conseguido un nuevo récord
+                            if (stopwatchTimer.GetElapsedTime() <= bestTime)
+                                StartCoroutine(BlinkCoroutine());
+                        }
+                        else
+                        {
+                            // No hay tiempo guardado todavía
+                            textBestTime.text = "Best time: --:--:--";
+                            textBestTime.gameObject.SetActive(true);
+                        }
+                    }
+                    
+                    if (panelPauseScript != null)
+                    {
+                        // Evitar que el usuario abra el menú de Pausa cuando se ha acabado la carrera
+                        panelPauseScript.canPause = false;
+
+                        // Iniciar la corutina que lo activará después del delay
+                        StartCoroutine(ActivatePausePanelAfterDelay());
+                    }
+
+                    Debug.Log("¡Meta alcanzada! Cronómetro detenido y vehículo parado.");
                 }
             }
-            
-            if (panelPauseScript != null)
-            {
-                // Evitar que el usuario abra el menú de Pausa cuando se ha acabado la carrera
-                panelPauseScript.canPause = false;
-
-                // Iniciar la corutina que lo activará después del delay
-                StartCoroutine(ActivatePausePanelAfterDelay());
-            }
-
-            Debug.Log("¡Meta alcanzada! Cronómetro detenido y vehículo parado.");
         }
     }
 
