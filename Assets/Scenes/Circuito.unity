@@ -5249,6 +5249,83 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 029572f17ecac4fab850801d287557b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!1001 &2313199247984120401
+PrefabInstance:
+  m_ObjectHideFlags: 0
+  serializedVersion: 2
+  m_Modification:
+    serializedVersion: 3
+    m_TransformParent: {fileID: 0}
+    m_Modifications:
+    - target: {fileID: 487905036460102815, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: m_Name
+      value: PrometheusShadow
+      objectReference: {fileID: 0}
+    - target: {fileID: 2061548465239835837, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: stopper
+      value: 
+      objectReference: {fileID: 817389985}
+    - target: {fileID: 5362235511502728187, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: m_Enabled
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 6011464773698917583, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: carEngineSound
+      value: 
+      objectReference: {fileID: 616670650}
+    - target: {fileID: 6011464773698917583, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: tireScreechSound
+      value: 
+      objectReference: {fileID: 177168441}
+    - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 13.5
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 7.4000053
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: -65.53
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: m_LocalRotation.w
+      value: 0.71036255
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: m_LocalRotation.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: m_LocalRotation.y
+      value: 0.70383596
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: m_LocalRotation.z
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.y
+      value: 89.471
+      objectReference: {fileID: 0}
+    - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 8740658881901685452, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      propertyPath: speedText
+      value: 
+      objectReference: {fileID: 25569174}
+    m_RemovedComponents: []
+    m_RemovedGameObjects: []
+    m_AddedGameObjects: []
+    m_AddedComponents: []
+  m_SourcePrefab: {fileID: 100100000, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
@@ -5260,6 +5337,7 @@ SceneRoots:
   - {fileID: 2029156573}
   - {fileID: 557867902}
   - {fileID: 1655623745}
+  - {fileID: 2313199247984120401}
   - {fileID: 1510008534}
   - {fileID: 1685457968}
   - {fileID: 1886041309}
