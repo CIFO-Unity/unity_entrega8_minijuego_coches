@@ -17,6 +17,12 @@ public class FinishLine : MonoBehaviour
     [SerializeField] private float fadeDuration = 2f;         // Duración del fade
     [SerializeField] private float targetAlpha = 0.7f;        // Alfa máximo (0 a 1)
 
+    [Header("Blink Settings")]
+    [SerializeField] private Color blinkColor = Color.red;
+    [SerializeField] private float duration = 2f;
+    [SerializeField] private float blinkSpeed = 0.2f; // tiempo entre cambios de color
+
+
     private void Start()
     {
         if (finishMessageUI != null)
@@ -71,7 +77,7 @@ public class FinishLine : MonoBehaviour
             BestTimeManager.SaveBestTime(stopwatchTimer.GetElapsedTime());
 
             // Mostrar tu tiempo
-            if (textYourTime != null)
+            if (textYourTime != null && stopwatchTimer != null)
             {
                 // Mostrar en el texto, formato mm:ss:ff (minutos:segundos:centésimas)
                 int minutes = Mathf.FloorToInt(stopwatchTimer.GetElapsedTime() / 60f);
@@ -85,7 +91,7 @@ public class FinishLine : MonoBehaviour
             }
 
             // Mostrar mejor tiempo
-            if (textBestTime != null)
+            if (textBestTime != null && stopwatchTimer != null)
             {
                 float bestTime = BestTimeManager.GetBestTime();
 
@@ -101,6 +107,10 @@ public class FinishLine : MonoBehaviour
 
                     // Activar el texto si estaba oculto
                     textBestTime.gameObject.SetActive(true);
+
+                    // Hacer que parpadee si se ha conseguido un nuevo récord
+                    if(stopwatchTimer.GetElapsedTime() <= bestTime)
+                        StartCoroutine(BlinkCoroutine());
                 }
                 else
                 {
@@ -131,5 +141,23 @@ public class FinishLine : MonoBehaviour
 
         color.a = targetAlpha;
         panel.color = color;
+    }
+
+    private IEnumerator BlinkCoroutine()
+    {
+        Color originalColor = textBestTime.color;
+        float elapsed = 0f;
+
+        while (elapsed < duration)
+        {
+            // Alternar entre color original y color de parpadeo
+            textBestTime.color = textBestTime.color == originalColor ? blinkColor : originalColor;
+
+            elapsed += blinkSpeed;
+            yield return new WaitForSeconds(blinkSpeed);
+        }
+
+        // Asegurarse de que el texto vuelve al color original
+        textBestTime.color = originalColor;
     }
 }

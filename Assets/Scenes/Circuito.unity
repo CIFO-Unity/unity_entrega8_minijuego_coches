@@ -458,6 +458,9 @@ MonoBehaviour:
   textBestTime: {fileID: 880278251}
   fadeDuration: 2
   targetAlpha: 1
+  blinkColor: {r: 1, g: 0, b: 0, a: 1}
+  duration: 10
+  blinkSpeed: 0.2
 --- !u!1 &267050545
 GameObject:
   m_ObjectHideFlags: 0
