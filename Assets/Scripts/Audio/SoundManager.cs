@@ -1,4 +1,5 @@
 using UnityEngine;
+using System.Collections;
 
 public class SoundManager : MonoBehaviour
 {
@@ -110,6 +111,23 @@ public class SoundManager : MonoBehaviour
         {
             currentMusicSource.UnPause();
         }
+    }
+
+    public IEnumerator FadeOutMusic(float duration = 1.5f)
+    {
+        if (currentMusicSource == null || !currentMusicSource.isPlaying)
+            yield break;
+
+        float startVolume = currentMusicSource.volume;
+
+        while (currentMusicSource.volume > 0f)
+        {
+            currentMusicSource.volume -= startVolume * Time.deltaTime / duration;
+            yield return null;
+        }
+
+        currentMusicSource.Stop();
+        currentMusicSource.volume = startVolume; // Restaurar volumen para la próxima vez
     }
 
     #endregion
