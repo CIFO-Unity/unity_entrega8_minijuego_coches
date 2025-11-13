@@ -15,6 +15,8 @@ public class SplashScreenController : MonoBehaviour
         Color color = fadePanel.color;
         color.a = 0f;
         fadePanel.color = color;
+
+        SoundManager.SafePlayBackgroundMusic("TickOfTheClock");
         
         Invoke("StartFade", waitTime);
     }
