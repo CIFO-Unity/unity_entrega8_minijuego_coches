@@ -52,6 +52,9 @@ public class FinishLine : MonoBehaviour
             if (finishPanel != null)
                 StartCoroutine(FadeInPanel(finishPanel, fadeDuration, targetAlpha));
 
+            // Fade out de la música de fondo
+            StartCoroutine(SoundManager.Instance.FadeOutMusic(fadeDuration));
+
             Debug.Log("¡Meta alcanzada! Cronómetro detenido y vehículo parado.");
         }
     }

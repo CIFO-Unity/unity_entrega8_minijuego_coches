@@ -455,7 +455,7 @@ MonoBehaviour:
   playerTag: Player
   finishPanel: {fileID: 1528382423}
   fadeDuration: 2
-  targetAlpha: 0.85
+  targetAlpha: 1
 --- !u!1 &267050545
 GameObject:
   m_ObjectHideFlags: 0
