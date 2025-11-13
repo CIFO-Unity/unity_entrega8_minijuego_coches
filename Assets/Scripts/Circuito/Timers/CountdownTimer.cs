@@ -45,7 +45,8 @@ public class CountdownTimer : MonoBehaviour
 
         // Reproducir sonido usando SoundManager
         //SoundManager.SafePlaySound("3-2-1-Go");
-        SoundManager.SafePlaySound("Three");
+        if (SoundManager.Instance != null)
+            SoundManager.SafePlaySound("Three");
 
         StartCoroutine(Countdown());
     }
@@ -58,13 +59,16 @@ public class CountdownTimer : MonoBehaviour
             switch (currentTime)
             {
                 case 3:
-                    SoundManager.SafePlaySound("Three");
+                    if (SoundManager.Instance != null)
+                        SoundManager.SafePlaySound("Three");
                     break;
                 case 2:
-                    SoundManager.SafePlaySound("Two");
+                    if (SoundManager.Instance != null)
+                        SoundManager.SafePlaySound("Two");
                     break;
                 case 1:
-                    SoundManager.SafePlaySound("One");
+                    if (SoundManager.Instance != null)
+                        SoundManager.SafePlaySound("One");
                     break;
             }
 
@@ -82,7 +86,8 @@ public class CountdownTimer : MonoBehaviour
         timerText.text = "";
 
         // Reproducir música de fondo usando SoundManager
-        SoundManager.SafePlayBackgroundMusic("Nightcall");
+        if (SoundManager.Instance != null)
+            SoundManager.SafePlayBackgroundMusic("Nightcall");
 
         if (stopwatchTimer != null)
             stopwatchTimer.StartTimer();

@@ -52,7 +52,8 @@ public class PanelPause : MonoBehaviour
         Time.timeScale = 0f; // Pausar el juego
         isPaused = true;
 
-        SoundManager.SafeLowerBackgroundMusicVolume();
+        if (SoundManager.Instance != null)
+            SoundManager.SafeLowerBackgroundMusicVolume();
     }
 
     private void ResumeGame()
@@ -63,19 +64,22 @@ public class PanelPause : MonoBehaviour
         Time.timeScale = 1f; // Reanudar el juego
         isPaused = false;
 
-        SoundManager.SafeRestoreBackgroundMusicVolume();
+        if (SoundManager.Instance != null)
+            SoundManager.SafeRestoreBackgroundMusicVolume();
     }
 
     private void RestartScene()
     {
-        SoundManager.SafeStopBackgroundMusic();
+        if (SoundManager.Instance != null)
+            SoundManager.SafeStopBackgroundMusic();
         Time.timeScale = 1f; // Asegurarse de que el tiempo vuelva a la normalidad
         SceneManager.LoadScene(SceneManager.GetActiveScene().name);
     }
 
     private void GoToMainMenu()
     {
-        SoundManager.SafeStopBackgroundMusic();
+        if (SoundManager.Instance != null)
+            SoundManager.SafeStopBackgroundMusic();
         Time.timeScale = 1f; // Asegurarse de que el tiempo vuelva a la normalidad
         SceneManager.LoadScene("MainMenu"); // Nombre de tu escena de menú
     }
