@@ -87,7 +87,7 @@ public class CarRecorder : MonoBehaviour
 
         string path = Application.persistentDataPath + "/" + recordingFileName;
 
-        Debug.Log("El archivo se guarda en: " + Application.persistentDataPath);
+        //Debug.Log("El archivo se guarda en: " + Application.persistentDataPath);
 
         // Si ya hay una grabación, solo sustituir si el tiempo es mejor
         if (File.Exists(path))

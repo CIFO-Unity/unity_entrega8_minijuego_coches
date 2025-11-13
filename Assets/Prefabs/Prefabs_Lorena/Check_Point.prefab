@@ -528,6 +528,7 @@ GameObject:
   serializedVersion: 6
   m_Component:
   - component: {fileID: 7550920486068299104}
+  - component: {fileID: 1982448092476710177}
   m_Layer: 0
   m_Name: Check_Point
   m_TagString: Untagged
@@ -554,6 +555,26 @@ Transform:
   - {fileID: 1526019450493012612}
   m_Father: {fileID: 0}
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1982448092476710177
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3565794160447811861}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d0a384281bc864401a60cb0c073ce802, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  spotlights:
+  - {fileID: 801056343220566919}
+  - {fileID: 2933406258140445630}
+  - {fileID: 8565953540204095223}
+  - {fileID: 9127846151394112213}
+  blinkInterval: 0.25
+  startOnAwake: 1
+  randomOffset: 0
 --- !u!1 &3893851578613085718
 GameObject:
   m_ObjectHideFlags: 0
