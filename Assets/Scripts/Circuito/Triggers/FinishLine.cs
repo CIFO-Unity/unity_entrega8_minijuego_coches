@@ -10,8 +10,10 @@ public class FinishLine : MonoBehaviour
     [SerializeField] private GameObject finishMessageUI;      // Texto "Finish!"
     [SerializeField] private string playerTag = "Player";     // Tag del vehículo
     [SerializeField] private Image finishPanel;              // Panel que se desvanecerá al llegar a meta
-    [SerializeField] private TextMeshProUGUI textYourTime; 
+    [SerializeField] private TextMeshProUGUI textYourTime;
     [SerializeField] private TextMeshProUGUI textBestTime; 
+    [SerializeField] private GameObject finishPause;
+
 
     [Header("Fade Settings")]
     [SerializeField] private float fadeDuration = 2f;         // Duración del fade
@@ -21,7 +23,6 @@ public class FinishLine : MonoBehaviour
     [SerializeField] private Color blinkColor = Color.red;
     [SerializeField] private float duration = 2f;
     [SerializeField] private float blinkSpeed = 0.2f; // tiempo entre cambios de color
-
 
     private void Start()
     {

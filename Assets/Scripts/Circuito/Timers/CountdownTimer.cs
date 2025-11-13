@@ -20,6 +20,10 @@ public class CountdownTimer : MonoBehaviour
     [Header("Car Controller Activator")]
     private CarControllerActivator carControllerActivator;
 
+    [SerializeField]
+    [Header("Panel Pause")]
+    private PanelPause panelPause;
+
     private int currentTime;
 
     void Start()
@@ -63,5 +67,9 @@ public class CountdownTimer : MonoBehaviour
 
         if (carControllerActivator != null)
             carControllerActivator.ActivateCarControl();
+
+        // Permitir acceder el menú de pausa
+        if (panelPause != null)
+            panelPause.canPause = true;
     }
 }

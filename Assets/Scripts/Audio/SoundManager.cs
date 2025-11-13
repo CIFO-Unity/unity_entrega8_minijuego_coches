@@ -167,19 +167,6 @@ public class SoundManager : MonoBehaviour
 
     #region Mejoras futuras
 
-    /*
-    
-        Métodos no usados
-    
-        · Estos métodos evitarían tener que hacer 'if (SoundManager.Instance != null)' antes de reproducir un audio.
-    
-        · Se usarían:
-
-            SoundManager.SafePlayBackgroundMusic("LevelMario1");
-            SoundManager.SafePlaySound("Coin");
-
-    */
-
     public static void SafePlayBackgroundMusic(string musicName)
     {
         if (Instance == null)
@@ -187,8 +174,19 @@ public class SoundManager : MonoBehaviour
             Debug.LogWarning("SoundManager not initialized. Cannot play background music: " + musicName);
             return;
         }
-        
+
         Instance.PlayBackgroundMusic(musicName);
+    }
+    
+    public static void SafeStopBackgroundMusic()
+    {
+        if (Instance == null)
+        {
+            Debug.LogWarning("SoundManager not initialized. Cannot stop background music.");
+            return;
+        }
+
+        Instance.StopBackgroundMusic();
     }
 
     public static void SafePlaySound(string sfxName)
