@@ -587,6 +587,7 @@ MonoBehaviour:
   textBestTime: {fileID: 880278251}
   panelPauseScript: {fileID: 1685457970}
   delayPanelPause: 5
+  carRecorder: {fileID: 2125572647}
   fadeDuration: 2
   targetAlpha: 1
   blinkColor: {r: 1, g: 0, b: 0, a: 1}
@@ -3484,6 +3485,11 @@ AudioSource:
     m_PreInfinity: 2
     m_PostInfinity: 2
     m_RotationOrder: 4
+--- !u!1 &1460270379 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+  m_PrefabInstance: {fileID: 1655623745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1480377163
 GameObject:
   m_ObjectHideFlags: 0
@@ -4017,7 +4023,10 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 2125572647}
   m_SourcePrefab: {fileID: 100100000, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
 --- !u!1 &1685457966
 GameObject:
@@ -4055,6 +4064,8 @@ MonoBehaviour:
   stopwatchTimer: {fileID: 1685457969}
   carControllerActivator: {fileID: 2125572640}
   panelPause: {fileID: 1685457970}
+  carRecorder: {fileID: 2125572647}
+  carGhost: {fileID: 8417875695730153773}
 --- !u!4 &1685457968
 Transform:
   m_ObjectHideFlags: 0
@@ -5232,7 +5243,7 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 512978147342133860, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
   m_PrefabInstance: {fileID: 1655623745}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1460270379}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9bf37f97aa0d9430b855e87d58f95d9e, type: 3}
@@ -5243,12 +5254,30 @@ MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 8417875694694430856, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
   m_PrefabInstance: {fileID: 1655623745}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
+  m_GameObject: {fileID: 1460270379}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 029572f17ecac4fab850801d287557b0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+--- !u!114 &2125572647
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460270379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ac0d9832c90fa4e9b9206f90e432fd70, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  recordEveryXFrames: 2
+--- !u!1 &642287923089035806 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 487905036460102815, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+  m_PrefabInstance: {fileID: 2313199247984120401}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2313199247984120401
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -5324,8 +5353,24 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents: []
+    m_AddedComponents:
+    - targetCorrespondingSourceObject: {fileID: 487905036460102815, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+      insertIndex: 6
+      addedObject: {fileID: 8417875695730153773}
   m_SourcePrefab: {fileID: 100100000, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+--- !u!114 &8417875695730153773
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 642287923089035806}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9c73e71ba9364404aa24f1f56fb8cb01, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playbackSpeed: 1
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0

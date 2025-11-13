@@ -14,6 +14,7 @@ public class FinishLine : MonoBehaviour
     [SerializeField] private TextMeshProUGUI textBestTime; 
     [SerializeField] private PanelPause panelPauseScript; // Referencia al script PanelPause
     [SerializeField] private float delayPanelPause = 5f; // Segundos antes de mostrar el panel
+    [SerializeField] private CarRecorder carRecorder; 
 
 
     [Header("Fade Settings")]
@@ -52,6 +53,9 @@ public class FinishLine : MonoBehaviour
             // 1️⃣ Detener el cronómetro
             if (stopwatchTimer != null)
                 stopwatchTimer.StopTimer();
+
+            if (carRecorder != null & stopwatchTimer != null)
+                carRecorder.StopRecording(stopwatchTimer.GetElapsedTime());
 
             // 2️⃣ Detener el coche ajustando MaxSpeed a 0
             PrometeoCarController carController = other.GetComponent<PrometeoCarController>();

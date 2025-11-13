@@ -12,17 +12,23 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField]
     private int startTime = 10;         // Tiempo inicial en segundos
 
-    [SerializeField]
     [Header("Stopwatch")]
+    [SerializeField]
     private StopwatchTimer stopwatchTimer;      // Referencia al cronómetro
 
-    [SerializeField]
     [Header("Car Controller Activator")]
+    [SerializeField]
     private CarControllerActivator carControllerActivator;
 
-    [SerializeField]
     [Header("Panel Pause")]
+    [SerializeField]
     private PanelPause panelPause;
+
+    [Header("Car Recorder")]
+    [SerializeField]
+    private CarRecorder carRecorder;
+    [SerializeField]
+    private CarPlayback carGhost;
 
     private int currentTime;
 
@@ -87,5 +93,13 @@ public class CountdownTimer : MonoBehaviour
         // Permitir acceder el menú de pausa
         if (panelPause != null)
             panelPause.canPause = true;
+
+        // Empezar a grabar el movimiento del coche
+        if (carRecorder != null)
+            carRecorder.StartRecording();
+
+        // Reproducir el coche fantasma
+        CarRecording recording = carRecorder.LoadRecording();
+        carGhost.StartPlayback(recording);
     }
 }
