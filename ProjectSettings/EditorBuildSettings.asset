@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/MainMenu.unity
     guid: 17d6c32ab78954a19b1783e80b02188a
   - enabled: 1
+    path: Assets/Scenes/SelectCar.unity
+    guid: 5188f59577699a045b091b28fddb4301
+  - enabled: 1
     path: Assets/Scenes/Circuito.unity
     guid: 2290c2c1804224f7097c91fe2700e27c
   m_configObjects:

@@ -121,6 +121,11 @@ public class PrometeoCarController : MonoBehaviour
       PrometeoTouchInput turnLeftPTI;
       public GameObject handbrakeButton;
       PrometeoTouchInput handbrakePTI;
+      // Input axes (allow using Unity's Input Manager axes instead of hardcoded keys)
+      public string forwardAxis = "Vertical"; // default Unity vertical axis (W/S or Up/Down)
+      public string steerAxisName = "Horizontal"; // default Unity horizontal axis (A/D or Left/Right)
+      [Range(0f, 0.5f)]
+      public float axisDeadzone = 0.1f;
 
     //CAR DATA
 
@@ -325,41 +330,53 @@ public class PrometeoCarController : MonoBehaviour
           ResetSteeringAngle();
         }
 
-      }else{
+      } else {
 
-        if(Input.GetKey(KeyCode.W)){
+        // Read input axes instead of hardcoded keys
+        float v = Input.GetAxis(forwardAxis);
+        float h = Input.GetAxis(steerAxisName);
+
+        // Forward / Reverse using vertical axis with deadzone
+        if (v > axisDeadzone) {
           CancelInvoke("DecelerateCar");
           deceleratingCar = false;
           GoForward();
-        }
-        if(Input.GetKey(KeyCode.S)){
+        } else if (v < -axisDeadzone) {
           CancelInvoke("DecelerateCar");
           deceleratingCar = false;
           GoReverse();
         }
 
-        if(Input.GetKey(KeyCode.A)){
+        // Steering using horizontal axis
+        if (h < -axisDeadzone) {
           TurnLeft();
-        }
-        if(Input.GetKey(KeyCode.D)){
+        } else if (h > axisDeadzone) {
           TurnRight();
         }
-        if(Input.GetKey(KeyCode.Space)){
+
+        // Handbrake (keep keyboard Space behaviour)
+        if (Input.GetKey(KeyCode.Space)){
           CancelInvoke("DecelerateCar");
           deceleratingCar = false;
           Handbrake();
         }
-        if(Input.GetKeyUp(KeyCode.Space)){
+        if (Input.GetKeyUp(KeyCode.Space)){
           RecoverTraction();
         }
-        if((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W))){
+
+        // Throttle off when vertical axis is near zero
+        if (Mathf.Abs(v) <= axisDeadzone){
           ThrottleOff();
         }
-        if((!Input.GetKey(KeyCode.S) && !Input.GetKey(KeyCode.W)) && !Input.GetKey(KeyCode.Space) && !deceleratingCar){
+
+        // Start decelerating when no forward/back input and not handbrake
+        if (Mathf.Abs(v) <= axisDeadzone && !Input.GetKey(KeyCode.Space) && !deceleratingCar){
           InvokeRepeating("DecelerateCar", 0f, 0.1f);
           deceleratingCar = true;
         }
-        if(!Input.GetKey(KeyCode.A) && !Input.GetKey(KeyCode.D) && steeringAxis != 0f){
+
+        // Reset steering when horizontal axis is near zero
+        if (Mathf.Abs(h) < axisDeadzone && steeringAxis != 0f){
           ResetSteeringAngle();
         }
 

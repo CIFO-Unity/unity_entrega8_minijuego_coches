@@ -19,10 +19,10 @@ public class MainMenuController : MonoBehaviour
             buttonCircuito.onClick.AddListener(() => StartCoroutine(LoadSceneWithFade("Circuito")));
 
         if (buttonCircuito2P != null)
-            buttonCircuito2P.onClick.AddListener(() => StartCoroutine(LoadSceneWithFade("Circuito2P")));
+            buttonCircuito2P.onClick.AddListener(() => StartCoroutine(LoadSceneWithFade("Circuito_2")));
 
         if (buttonCircuito4P != null)
-            buttonCircuito4P.onClick.AddListener(() => StartCoroutine(LoadSceneWithFade("Circuito4P")));
+            buttonCircuito4P.onClick.AddListener(() => StartCoroutine(LoadSceneWithFade("Circuito_4")));
     }
 
     private IEnumerator LoadSceneWithFade(string sceneName)
