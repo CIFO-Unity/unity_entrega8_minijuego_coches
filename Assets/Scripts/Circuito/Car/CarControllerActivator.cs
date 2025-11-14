@@ -46,11 +46,18 @@ public class CarControllerActivator : MonoBehaviour
     /// </summary>
     public void ActivateCarControl()
     {
-        if (carControllers == null || carControllers.Length == 0) return;
-        foreach (var ctrl in carControllers)
+        // At activation time, detect current controllers in the scene to ensure we
+        // enable controllers that may have been created or assigned after Start().
+        // Use Resources.FindObjectsOfTypeAll to include inactive scene objects across Unity versions,
+        // then filter to instances belonging to loaded scenes (exclude assets/prefabs).
+        var all = Resources.FindObjectsOfTypeAll<PrometeoCarController>();
+        if (all == null || all.Length == 0) return;
+        foreach (var ctrl in all)
         {
-            if (ctrl != null)
-                ctrl.enabled = true;
+            if (ctrl == null) continue;
+            // Ensure this instance belongs to a loaded scene (not a prefab asset)
+            if (!ctrl.gameObject.scene.IsValid() || !ctrl.gameObject.scene.isLoaded) continue;
+            ctrl.enabled = true;
         }
     }
 
