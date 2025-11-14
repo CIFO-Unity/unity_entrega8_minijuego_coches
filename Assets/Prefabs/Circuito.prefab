@@ -29022,6 +29022,14 @@ PrefabInstance:
       propertyPath: m_Name
       value: EA05_Planets_Moon_01a_Default (1)
       objectReference: {fileID: 0}
+    - target: {fileID: 4123097708831800, guid: 17fab8f84e31aa147952f80994c1baf4, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4123097708831800, guid: 17fab8f84e31aa147952f80994c1baf4, type: 3}
+      propertyPath: m_LocalPosition.z
+      value: 1.2
+      objectReference: {fileID: 0}
     - target: {fileID: 4134546544898022, guid: 17fab8f84e31aa147952f80994c1baf4, type: 3}
       propertyPath: m_LocalScale.x
       value: 0.25569436
@@ -31570,6 +31578,14 @@ PrefabInstance:
     - target: {fileID: 1140820162824838, guid: 941ea21b7644a994584fb3c607a5b113, type: 3}
       propertyPath: m_Name
       value: EA05_Planets_Saturn_01a_Default
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214351064503954, guid: 941ea21b7644a994584fb3c607a5b113, type: 3}
+      propertyPath: m_LocalPosition.x
+      value: -0
+      objectReference: {fileID: 0}
+    - target: {fileID: 4214351064503954, guid: 941ea21b7644a994584fb3c607a5b113, type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 2.87
       objectReference: {fileID: 0}
     - target: {fileID: 4350052322300222, guid: 941ea21b7644a994584fb3c607a5b113, type: 3}
       propertyPath: m_LocalScale.x
