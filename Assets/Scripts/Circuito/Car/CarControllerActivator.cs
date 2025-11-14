@@ -3,8 +3,8 @@ using UnityEngine;
 public class CarControllerActivator : MonoBehaviour
 {
     [Header("Car Controllers")]
-    [Tooltip("Assign one or more PrometeoCarController components to be activated by the countdown. If empty, will auto-detect.")]
-    [SerializeField] private PrometeoCarController[] carControllers;
+    // Controllers will be auto-detected at Start; no inspector assignment required.
+    private PrometeoCarController[] carControllers;
 
     private void Start()
     {

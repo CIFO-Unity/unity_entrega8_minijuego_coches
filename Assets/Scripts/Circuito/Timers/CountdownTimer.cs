@@ -84,14 +84,6 @@ public class CountdownTimer : MonoBehaviour
         else
         {
             activators = FindObjectsOfType<CarControllerActivator>(true);
-            if (activators == null || activators.Length == 0)
-            {
-                Debug.LogWarning("CountdownTimer: no CarControllerActivator found in the scene.");
-            }
-            else
-            {
-                Debug.Log($"CountdownTimer: found {activators.Length} CarControllerActivator(s) in scene. Activating each.");
-            }
         }
 
         if (activators != null)
@@ -99,7 +91,6 @@ public class CountdownTimer : MonoBehaviour
             foreach (var act in activators)
             {
                 if (act == null) continue;
-                Debug.Log($"CountdownTimer: calling ActivateCarControl on '{act.gameObject.name}'.");
                 act.ActivateCarControl();
             }
         }
