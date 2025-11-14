@@ -4,14 +4,15 @@ using TMPro;
 public class StopwatchTimer : MonoBehaviour
 {
     [Header("UI Settings")]
-    [SerializeField] public TextMeshProUGUI timerText; // Texto donde se mostrará el tiempo
+    [Tooltip("One or more UI text elements where the timer will be displayed. If multiple, the same time is written to each.")]
+    [SerializeField] public TextMeshProUGUI[] timerText; // Text elements where the time will be displayed
 
     private float elapsedTime = 0f;   // Tiempo acumulado
     private bool isRunning = false;   // Ahora empieza detenido
 
     void Update()
     {
-        if (!isRunning || timerText == null)
+        if (!isRunning || timerText == null || timerText.Length == 0)
             return;
 
         // Incrementar el tiempo
@@ -22,7 +23,12 @@ public class StopwatchTimer : MonoBehaviour
         int seconds = Mathf.FloorToInt(elapsedTime % 60f);
         int hundredths = Mathf.FloorToInt((elapsedTime * 100) % 100);
 
-        timerText.text = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, hundredths);
+        string formatted = string.Format("{0:00}:{1:00}:{2:00}", minutes, seconds, hundredths);
+        for (int i = 0; i < timerText.Length; i++)
+        {
+            if (timerText[i] == null) continue;
+            timerText[i].text = formatted;
+        }
     }
 
     /// <summary>

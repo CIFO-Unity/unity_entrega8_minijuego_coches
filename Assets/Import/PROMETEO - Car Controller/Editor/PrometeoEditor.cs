@@ -74,6 +74,12 @@ public class PrometeoEditor : Editor{
   private SerializedProperty turnRightButton;
   private SerializedProperty turnLeftButton;
   private SerializedProperty handbrakeButton;
+  
+  // INPUT AXES / MULTIPLAYER
+  private SerializedProperty player;
+  private SerializedProperty forwardAxis;
+  private SerializedProperty steerAxisName;
+  private SerializedProperty axisDeadzone;
 
   private void OnEnable(){
     prometeo = (PrometeoCarController)target;
@@ -117,6 +123,11 @@ public class PrometeoEditor : Editor{
     turnRightButton = SO.FindProperty("turnRightButton");
     turnLeftButton = SO.FindProperty("turnLeftButton");
     handbrakeButton = SO.FindProperty("handbrakeButton");
+
+    player = SO.FindProperty("player");
+    forwardAxis = SO.FindProperty("forwardAxis");
+    steerAxisName = SO.FindProperty("steerAxisName");
+    axisDeadzone = SO.FindProperty("axisDeadzone");
 
   }
 
@@ -241,6 +252,15 @@ public class PrometeoEditor : Editor{
         EditorGUILayout.PropertyField(handbrakeButton, new GUIContent("Handbrake Button: "));
 
     EditorGUILayout.EndToggleGroup();
+
+    // INPUT AXES / MULTIPLAYER
+    GUILayout.Space(25);
+    GUILayout.Label("INPUT / MULTIPLAYER", EditorStyles.boldLabel);
+    GUILayout.Space(6);
+    EditorGUILayout.PropertyField(player, new GUIContent("Player id (player/player2/..):"));
+    EditorGUILayout.PropertyField(forwardAxis, new GUIContent("Forward Axis:"));
+    EditorGUILayout.PropertyField(steerAxisName, new GUIContent("Steer Axis:"));
+    axisDeadzone.floatValue = EditorGUILayout.Slider("Axis Deadzone:", axisDeadzone.floatValue, 0f, 0.5f);
 
     //END
 

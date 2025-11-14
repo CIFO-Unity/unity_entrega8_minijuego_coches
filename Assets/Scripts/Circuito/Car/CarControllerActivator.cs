@@ -2,44 +2,68 @@ using UnityEngine;
 
 public class CarControllerActivator : MonoBehaviour
 {
-    [SerializeField] private PrometeoCarController carController; // Referencia al script de control del coche
+    [Header("Car Controllers")]
+    [Tooltip("Assign one or more PrometeoCarController components to be activated by the countdown. If empty, will auto-detect.")]
+    [SerializeField] private PrometeoCarController[] carControllers;
 
     private void Start()
     {
-        if (carController == null)
+        // If nothing is assigned in the inspector, try to auto-detect controllers in children or the scene.
+        if (carControllers == null || carControllers.Length == 0)
         {
-            carController = GetComponent<PrometeoCarController>();
+            // Prefer children of this GameObject
+            var foundInChildren = GetComponentsInChildren<PrometeoCarController>(true);
+            if (foundInChildren != null && foundInChildren.Length > 0)
+            {
+                carControllers = foundInChildren;
+            }
+            else
+            {
+                // Fallback: find all controllers in the scene
+                var foundInScene = FindObjectsOfType<PrometeoCarController>(true);
+                if (foundInScene != null && foundInScene.Length > 0)
+                    carControllers = foundInScene;
+            }
         }
 
-        if (carController != null)
+        if (carControllers != null && carControllers.Length > 0)
         {
-            carController.enabled = false; // Desactivar el control al inicio
+            // Disable all assigned controllers at start
+            foreach (var ctrl in carControllers)
+            {
+                if (ctrl != null)
+                    ctrl.enabled = false;
+            }
         }
         else
         {
-            Debug.LogWarning("No se encontró el componente PrometeoCarController en el GameObject del vehículo.");
+            // No controllers found or assigned; nothing to disable.
         }
     }
 
     /// <summary>
-    /// Activa el control del vehículo.
+    /// Activa el control de todos los vehículos asignados.
     /// </summary>
     public void ActivateCarControl()
     {
-        if (carController != null)
+        if (carControllers == null || carControllers.Length == 0) return;
+        foreach (var ctrl in carControllers)
         {
-            carController.enabled = true;
+            if (ctrl != null)
+                ctrl.enabled = true;
         }
     }
 
     /// <summary>
-    /// Desactiva el control del vehículo.
+    /// Desactiva el control de todos los vehículos asignados.
     /// </summary>
     public void DeactivateCarControl()
     {
-        if (carController != null)
+        if (carControllers == null) return;
+        foreach (var ctrl in carControllers)
         {
-            carController.enabled = false;
+            if (ctrl != null)
+                ctrl.enabled = false;
         }
     }
 }

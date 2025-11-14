@@ -122,10 +122,12 @@ public class PrometeoCarController : MonoBehaviour
       public GameObject handbrakeButton;
       PrometeoTouchInput handbrakePTI;
       // Input axes (allow using Unity's Input Manager axes instead of hardcoded keys)
+      public string player = "player"; // "player", "player2", "player3", "player4"
       public string forwardAxis = "Vertical"; // default Unity vertical axis (W/S or Up/Down)
       public string steerAxisName = "Horizontal"; // default Unity horizontal axis (A/D or Left/Right)
       [Range(0f, 0.5f)]
       public float axisDeadzone = 0.1f;
+
 
     //CAR DATA
 
@@ -265,6 +267,28 @@ public class PrometeoCarController : MonoBehaviour
           }
         }
 
+          // Map player identifier to axis names for local multiplayer setup
+          // If you want custom axis names, change `player` to "player2"/"player3"/"player4"
+          // or override `forwardAxis`/`steerAxisName` manually in the Inspector.
+          switch (player != null ? player.ToLower() : "player"){
+            case "player2":
+              forwardAxis = "Vertical2P";
+              steerAxisName = "Horizontal2P";
+              break;
+            case "player3":
+              forwardAxis = "Vertical3P";
+              steerAxisName = "Horizontal3P";
+              break;
+            case "player4":
+              forwardAxis = "Vertical4P";
+              steerAxisName = "Horizontal4P";
+              break;
+            default:
+              forwardAxis = "Vertical";
+              steerAxisName = "Horizontal";
+              break;
+          }
+
     }
 
     // Update is called once per frame
@@ -387,6 +411,8 @@ public class PrometeoCarController : MonoBehaviour
       AnimateWheelMeshes();
 
     }
+
+    
 
     // This method converts the car speed data from float to string, and then set the text of the UI carSpeedText with this value.
     public void CarSpeedUI(){

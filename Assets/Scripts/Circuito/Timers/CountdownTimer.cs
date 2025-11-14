@@ -74,7 +74,35 @@ public class CountdownTimer : MonoBehaviour
         }*/
 
         // Permitir que el jugador se mueva
-        carControllerActivator?.ActivateCarControl();
+        // Llamar a todos los CarControllerActivator que existan en la escena (si hay varios)
+        CarControllerActivator[] activators = null;
+        if (carControllerActivator != null)
+        {
+            activators = new CarControllerActivator[] { carControllerActivator };
+            Debug.Log($"CountdownTimer: using serialized CarControllerActivator on '{carControllerActivator.gameObject.name}'.");
+        }
+        else
+        {
+            activators = FindObjectsOfType<CarControllerActivator>(true);
+            if (activators == null || activators.Length == 0)
+            {
+                Debug.LogWarning("CountdownTimer: no CarControllerActivator found in the scene.");
+            }
+            else
+            {
+                Debug.Log($"CountdownTimer: found {activators.Length} CarControllerActivator(s) in scene. Activating each.");
+            }
+        }
+
+        if (activators != null)
+        {
+            foreach (var act in activators)
+            {
+                if (act == null) continue;
+                Debug.Log($"CountdownTimer: calling ActivateCarControl on '{act.gameObject.name}'.");
+                act.ActivateCarControl();
+            }
+        }
 
         // Iniciar cronómetro
         stopwatchTimer?.StartTimer();
