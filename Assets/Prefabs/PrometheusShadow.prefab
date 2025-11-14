@@ -148,6 +148,9 @@ MonoBehaviour:
   turnRightButton: {fileID: 0}
   turnLeftButton: {fileID: 0}
   handbrakeButton: {fileID: 0}
+  forwardAxis: Vertical
+  steerAxisName: Horizontal
+  axisDeadzone: 0.1
   carSpeed: 0
   isDrifting: 0
   isTractionLocked: 0
@@ -192,6 +195,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   checkpointCount: 0
   stopper: {fileID: 0}
+  finishBanner: {fileID: 0}
 --- !u!65 &4847272694600065254
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -391,7 +395,7 @@ WheelCollider:
   m_GameObject: {fileID: 1193479356672997934}
   serializedVersion: 2
   m_Center: {x: 0, y: 0.15, z: 0}
-  m_Radius: 0.36
+  m_Radius: 0
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
@@ -462,7 +466,7 @@ WheelCollider:
   m_GameObject: {fileID: 1559210580805921913}
   serializedVersion: 2
   m_Center: {x: 0, y: 0.15, z: 0}
-  m_Radius: 0.36
+  m_Radius: 0
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
@@ -595,7 +599,7 @@ GameObject:
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
-  m_IsActive: 0
+  m_IsActive: 1
 --- !u!4 &2082391111609173754
 Transform:
   m_ObjectHideFlags: 0
@@ -656,7 +660,7 @@ WheelCollider:
   m_GameObject: {fileID: 3144196696831374550}
   serializedVersion: 2
   m_Center: {x: 0, y: 0.15, z: 0}
-  m_Radius: 0.36
+  m_Radius: 0
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
@@ -1048,7 +1052,7 @@ WheelCollider:
   m_GameObject: {fileID: 5707162085239998723}
   serializedVersion: 2
   m_Center: {x: 0, y: 0.15, z: 0}
-  m_Radius: 0.36
+  m_Radius: 0
   m_SuspensionSpring:
     spring: 35000
     damper: 4500
