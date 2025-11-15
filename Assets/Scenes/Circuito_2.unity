@@ -643,6 +643,11 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+--- !u!1 &167235110 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8181279610690836821, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+  m_PrefabInstance: {fileID: 167235109}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &209298475
 GameObject:
   m_ObjectHideFlags: 0
@@ -3706,6 +3711,27 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1133168325}
   m_CullTransparentMesh: 1
+--- !u!1 &1197079109 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8343556260520702522, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+  m_PrefabInstance: {fileID: 1624746372}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1197079113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1197079109}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf15a35438fe4461a53e69b2eac2c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopwatchTimer: {fileID: 1685457969}
+  checkpointTimeText: {fileID: 295006898}
+  checkpointCounter: {fileID: 1883935318}
+  playerTag: Player2
 --- !u!1 &1220702195
 GameObject:
   m_ObjectHideFlags: 0
@@ -4028,6 +4054,27 @@ GameObject:
   m_CorrespondingSourceObject: {fileID: 844731616916348639, guid: a085054cb4ec66545ae092071b74dc84, type: 3}
   m_PrefabInstance: {fileID: 1306959696}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1320990994 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4542985455760920545, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+  m_PrefabInstance: {fileID: 1624746372}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1320990998
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1320990994}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf15a35438fe4461a53e69b2eac2c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopwatchTimer: {fileID: 1685457969}
+  checkpointTimeText: {fileID: 34133572}
+  checkpointCounter: {fileID: 1883935318}
+  playerTag: Player2
 --- !u!1 &1321219564
 GameObject:
   m_ObjectHideFlags: 0
@@ -4736,7 +4783,7 @@ PrefabInstance:
     - target: {fileID: 1629255688022756589, guid: a1e5e4bd930ef4a40a5b50f9170f8d3d, type: 3}
       propertyPath: stopper
       value: 
-      objectReference: {fileID: 817389985}
+      objectReference: {fileID: 167235110}
     - target: {fileID: 1629255688022756589, guid: a1e5e4bd930ef4a40a5b50f9170f8d3d, type: 3}
       propertyPath: finishBanner
       value: 
@@ -5046,6 +5093,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 331516514771504466, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      propertyPath: stopwatchTimer
+      value: 
+      objectReference: {fileID: 1685457969}
+    - target: {fileID: 331516514771504466, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      propertyPath: checkpointCounter
+      value: 
+      objectReference: {fileID: 1852585854}
+    - target: {fileID: 331516514771504466, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      propertyPath: checkpointTimeText
+      value: 
+      objectReference: {fileID: 348641746}
     - target: {fileID: 1163101098742416895, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
       propertyPath: stopwatchTimer
       value: 
@@ -5098,6 +5157,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5213023797868130441, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      propertyPath: stopwatchTimer
+      value: 
+      objectReference: {fileID: 1685457969}
+    - target: {fileID: 5213023797868130441, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      propertyPath: checkpointCounter
+      value: 
+      objectReference: {fileID: 1852585854}
+    - target: {fileID: 5213023797868130441, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      propertyPath: checkpointTimeText
+      value: 
+      objectReference: {fileID: 2089028034}
     - target: {fileID: 9083256382661495723, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
       propertyPath: m_Name
       value: CheckPoints
@@ -5109,6 +5180,12 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7455611311806462615, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1657037669}
+    - targetCorrespondingSourceObject: {fileID: 8343556260520702522, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1197079113}
+    - targetCorrespondingSourceObject: {fileID: 4542985455760920545, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1320990998}
   m_SourcePrefab: {fileID: 100100000, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
 --- !u!1 &1639917481
 GameObject:
@@ -6160,7 +6237,7 @@ PrefabInstance:
     - target: {fileID: 8417875694694430856, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
       propertyPath: stopper
       value: 
-      objectReference: {fileID: 817389985}
+      objectReference: {fileID: 167235110}
     - target: {fileID: 8417875694694430856, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
       propertyPath: finishBanner
       value: 
