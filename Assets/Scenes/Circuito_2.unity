@@ -4925,6 +4925,10 @@ PrefabInstance:
       propertyPath: tireScreechSound
       value: 
       objectReference: {fileID: 794692923}
+    - target: {fileID: 2115262692429865324, guid: a1e5e4bd930ef4a40a5b50f9170f8d3d, type: 3}
+      propertyPath: m_Enabled
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 2943944895344102014, guid: a1e5e4bd930ef4a40a5b50f9170f8d3d, type: 3}
       propertyPath: m_LocalPosition.x
       value: -0.000082970146
@@ -5550,7 +5554,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7cdcd7defe101455bb9a2766331074c5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  timerText: {fileID: 0}
   stopwatchTimer: {fileID: 1685457969}
   carControllerActivator: {fileID: 0}
   panelPause: {fileID: 1685457970}
