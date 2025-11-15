@@ -1,6 +1,7 @@
 using UnityEngine;
 using TMPro;
 using System.Collections;
+using UnityEngine.SceneManagement;
 
 public class CountdownTimer : MonoBehaviour
 {
@@ -26,9 +27,9 @@ public class CountdownTimer : MonoBehaviour
     [SerializeField] private GameObject greenLight;
 
     [Header("Audio Clips for Lights")]
-    [SerializeField] private string redLightSound = "Three";
-    [SerializeField] private string yellowLightSound = "Two";
-    [SerializeField] private string greenLightSound = "One";
+    [SerializeField] private string redLightSound = "CuentaAtras";
+    [SerializeField] private string yellowLightSound = "CuentaAtras";
+    [SerializeField] private string greenLightSound = "CuentaAtrasFinal";
 
     [Header("Countdown Settings")]
     [SerializeField] private float interval = 1f; // segundos entre cada luz
@@ -111,9 +112,30 @@ public class CountdownTimer : MonoBehaviour
             carGhost.StartPlayback(recording);
 
         // Esperar 1 segundo antes de empezar la música de fondo
-        yield return new WaitForSeconds(0.5f);
+        yield return new WaitForSeconds(0.75f);
         if (SoundManager.Instance != null)
-            SoundManager.SafePlayBackgroundMusic("Nightcall");
+        {
+            string sceneName = SceneManager.GetActiveScene().name;
+
+            switch (sceneName)
+            {
+                case "Circuito":
+                    SoundManager.SafePlayBackgroundMusic("Nightcall");
+                    break;
+
+                case "Circuito_2":
+                    SoundManager.SafePlayBackgroundMusic("ARealHero");
+                    break;
+
+                case "Circuito_4":
+                    SoundManager.SafePlayBackgroundMusic("UnderYourSpell");
+                    break;
+
+                default:
+                    SoundManager.SafePlayBackgroundMusic("Nightcall");
+                    break;
+            }
+        }
 
         // Esperar un segundo antes de ocultar el texto
         yield return new WaitForSeconds(1f);

@@ -3383,9 +3383,9 @@ MonoBehaviour:
   redLight: {fileID: 700335843}
   yellowLight: {fileID: 1473685197}
   greenLight: {fileID: 863860941}
-  redLightSound: Three
-  yellowLightSound: Two
-  greenLightSound: One
+  redLightSound: CuentaAtras
+  yellowLightSound: CuentaAtras
+  greenLightSound: CuentaAtrasFinal
   interval: 1
 --- !u!4 &1685457968
 Transform:
