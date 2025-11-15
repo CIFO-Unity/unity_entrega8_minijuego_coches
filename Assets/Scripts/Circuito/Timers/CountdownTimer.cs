@@ -5,9 +5,6 @@ using UnityEngine.SceneManagement;
 
 public class CountdownTimer : MonoBehaviour
 {
-    [Header("UI Settings")]
-    [SerializeField] private TextMeshProUGUI timerText;
-
     [Header("Stopwatch")]
     [SerializeField] private StopwatchTimer stopwatchTimer;
 
@@ -138,9 +135,9 @@ public class CountdownTimer : MonoBehaviour
         }
 
         // Esperar un segundo antes de ocultar el texto
-        yield return new WaitForSeconds(1f);
+        /*yield return new WaitForSeconds(1f);
         if (timerText != null)
-            timerText.text = "";
+            timerText.text = "";*/
     }
 
     // --- Métodos auxiliares para luces ---

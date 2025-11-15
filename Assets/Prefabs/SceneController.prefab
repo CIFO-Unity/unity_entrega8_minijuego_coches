@@ -1,0 +1,106 @@
+%YAML 1.1
+%TAG !u! tag:unity3d.com,2011:
+--- !u!1 &3340088462034918788
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 6463138758861810524}
+  - component: {fileID: 4442044491126190371}
+  - component: {fileID: 6203837205616900613}
+  - component: {fileID: 2479312341688673207}
+  - component: {fileID: 4628896574486891384}
+  m_Layer: 0
+  m_Name: SceneController
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &6463138758861810524
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3340088462034918788}
+  serializedVersion: 2
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 601, y: 338, z: 0}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_ConstrainProportionsScale: 0
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &4442044491126190371
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3340088462034918788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 7cdcd7defe101455bb9a2766331074c5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopwatchTimer: {fileID: 6203837205616900613}
+  carControllerActivator: {fileID: 0}
+  panelPause: {fileID: 2479312341688673207}
+  carRecorder: {fileID: 0}
+  carGhost: {fileID: 0}
+  redLight: {fileID: 0}
+  yellowLight: {fileID: 0}
+  greenLight: {fileID: 0}
+  redLightSound: CuentaAtras
+  yellowLightSound: CuentaAtras
+  greenLightSound: CuentaAtrasFinal
+  interval: 1
+--- !u!114 &6203837205616900613
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3340088462034918788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 73702030168cd4b138ccc17eed2eeb36, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  timerText:
+  - {fileID: 0}
+--- !u!114 &2479312341688673207
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3340088462034918788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 8c9ec3d1d8c9d4115b3a8d7197763f0a, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  panel: {fileID: 0}
+  playButton: {fileID: 0}
+  restartButton: {fileID: 0}
+  exitButton: {fileID: 0}
+  canPause: 0
+--- !u!114 &4628896574486891384
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 3340088462034918788}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 34d6202ddb8ff4ad684aa664a999214d, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carGhost: {fileID: 0}
+  carRecorder: {fileID: 0}
