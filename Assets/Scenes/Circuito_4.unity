@@ -263,6 +263,18 @@ PrefabInstance:
     serializedVersion: 3
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 331516514771504466, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      propertyPath: stopwatchTimer
+      value: 
+      objectReference: {fileID: 1685457969}
+    - target: {fileID: 331516514771504466, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      propertyPath: checkpointCounter
+      value: 
+      objectReference: {fileID: 2125572641}
+    - target: {fileID: 331516514771504466, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      propertyPath: checkpointTimeText
+      value: 
+      objectReference: {fileID: 1130725619}
     - target: {fileID: 1163101098742416895, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
       propertyPath: stopwatchTimer
       value: 
@@ -315,6 +327,18 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 5213023797868130441, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      propertyPath: stopwatchTimer
+      value: 
+      objectReference: {fileID: 1685457969}
+    - target: {fileID: 5213023797868130441, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      propertyPath: checkpointCounter
+      value: 
+      objectReference: {fileID: 2125572641}
+    - target: {fileID: 5213023797868130441, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      propertyPath: checkpointTimeText
+      value: 
+      objectReference: {fileID: 1206985522}
     - target: {fileID: 9083256382661495723, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
       propertyPath: m_Name
       value: CheckPoints
@@ -332,6 +356,24 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 7455611311806462615, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
       insertIndex: -1
       addedObject: {fileID: 1379535550}
+    - targetCorrespondingSourceObject: {fileID: 8343556260520702522, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1305391068}
+    - targetCorrespondingSourceObject: {fileID: 8343556260520702522, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1305391067}
+    - targetCorrespondingSourceObject: {fileID: 8343556260520702522, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1305391066}
+    - targetCorrespondingSourceObject: {fileID: 4542985455760920545, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1541724509}
+    - targetCorrespondingSourceObject: {fileID: 4542985455760920545, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1541724508}
+    - targetCorrespondingSourceObject: {fileID: 4542985455760920545, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 1541724507}
   m_SourcePrefab: {fileID: 100100000, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
 --- !u!1 &71993814
 GameObject:
@@ -7514,6 +7556,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1303117064}
   m_CullTransparentMesh: 1
+--- !u!1 &1305391062 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 8343556260520702522, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+  m_PrefabInstance: {fileID: 45176625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1305391066
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305391062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf15a35438fe4461a53e69b2eac2c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopwatchTimer: {fileID: 1685457969}
+  checkpointTimeText: {fileID: 422918865}
+  checkpointCounter: {fileID: 332456245}
+  playerTag: Player4
+--- !u!114 &1305391067
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305391062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf15a35438fe4461a53e69b2eac2c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopwatchTimer: {fileID: 1685457969}
+  checkpointTimeText: {fileID: 1219876725}
+  checkpointCounter: {fileID: 1888867661}
+  playerTag: Player3
+--- !u!114 &1305391068
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1305391062}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf15a35438fe4461a53e69b2eac2c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopwatchTimer: {fileID: 1685457969}
+  checkpointTimeText: {fileID: 1612035852}
+  checkpointCounter: {fileID: 1030879219}
+  playerTag: Player2
 --- !u!1001 &1306959696
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -9524,6 +9619,59 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1528382421}
   m_CullTransparentMesh: 1
+--- !u!1 &1541724503 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 4542985455760920545, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
+  m_PrefabInstance: {fileID: 45176625}
+  m_PrefabAsset: {fileID: 0}
+--- !u!114 &1541724507
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541724503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf15a35438fe4461a53e69b2eac2c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopwatchTimer: {fileID: 1685457969}
+  checkpointTimeText: {fileID: 1594988154}
+  checkpointCounter: {fileID: 332456245}
+  playerTag: Player4
+--- !u!114 &1541724508
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541724503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf15a35438fe4461a53e69b2eac2c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopwatchTimer: {fileID: 1685457969}
+  checkpointTimeText: {fileID: 1460100691}
+  checkpointCounter: {fileID: 1888867661}
+  playerTag: Player3
+--- !u!114 &1541724509
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1541724503}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: adf15a35438fe4461a53e69b2eac2c75, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  stopwatchTimer: {fileID: 1685457969}
+  checkpointTimeText: {fileID: 2074424485}
+  checkpointCounter: {fileID: 1030879219}
+  playerTag: Player2
 --- !u!1 &1583648407
 GameObject:
   m_ObjectHideFlags: 0
