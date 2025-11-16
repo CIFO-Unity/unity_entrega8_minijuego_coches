@@ -1026,7 +1026,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 642287924342879162, guid: 84d1dfd7a1a8b164f98f917fd2aeb701, type: 3}
       propertyPath: m_Name
-      value: Prometheus4 (1)
+      value: Prometheus
       objectReference: {fileID: 0}
     - target: {fileID: 642287924342879162, guid: 84d1dfd7a1a8b164f98f917fd2aeb701, type: 3}
       propertyPath: m_TagString
@@ -1219,7 +1219,7 @@ RectTransform:
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0.5, y: 0.5}
   m_AnchorMax: {x: 0.5, y: 0.5}
-  m_AnchoredPosition: {x: 29.744263, y: 63.5}
+  m_AnchoredPosition: {x: 25, y: 63.5}
   m_SizeDelta: {x: 200, y: 50}
   m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &1483343396
@@ -1242,7 +1242,7 @@ MonoBehaviour:
   m_OnCullStateChanged:
     m_PersistentCalls:
       m_Calls: []
-  m_text: Selecciona Color
+  m_text: SELECT COLOR
   m_isRightToLeft: 0
   m_fontAsset: {fileID: 11400000, guid: 1a0f7e66e7eef4756aa05942f0f0f2bf, type: 2}
   m_sharedMaterial: {fileID: 8330164395988209604, guid: 1a0f7e66e7eef4756aa05942f0f0f2bf, type: 2}
@@ -1650,8 +1650,8 @@ MonoBehaviour:
   m_fontMaterials: []
   m_fontColor32:
     serializedVersion: 2
-    rgba: 4281479730
-  m_fontColor: {r: 0.19607843, g: 0.19607843, b: 0.19607843, a: 1}
+    rgba: 4278506751
+  m_fontColor: {r: 1, g: 0.83137256, b: 0.015686275, a: 1}
   m_enableVertexGradient: 0
   m_colorMode: 3
   m_fontColorGradient:
@@ -2152,7 +2152,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Material: {fileID: 0}
-  m_Color: {r: 1, g: 1, b: 1, a: 1}
+  m_Color: {r: 0.16862746, g: 0.16862746, b: 0.16862746, a: 1}
   m_RaycastTarget: 1
   m_RaycastPadding: {x: 0, y: 0, z: 0, w: 0}
   m_Maskable: 1
@@ -2293,9 +2293,9 @@ SceneRoots:
   m_ObjectHideFlags: 0
   m_Roots:
   - {fileID: 1349242041}
-  - {fileID: 1643048300}
   - {fileID: 1536955092}
-  - {fileID: 1478377552}
-  - {fileID: 1306959696}
-  - {fileID: 1685457968}
   - {fileID: 1716424752}
+  - {fileID: 1643048300}
+  - {fileID: 1306959696}
+  - {fileID: 1478377552}
+  - {fileID: 1685457968}
