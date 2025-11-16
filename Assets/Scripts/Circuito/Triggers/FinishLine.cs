@@ -1,149 +1,271 @@
 using UnityEngine;
 using UnityEngine.UI;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 
-public class FinishLine : MonoBehaviour
+public class FinishLineMultiplayer : MonoBehaviour
 {
-    [Header("References")]
-    [SerializeField] private StopwatchTimer stopwatchTimer;   // Cronómetro
-    [SerializeField] private GameObject finishMessageUI;      // Texto "Finish!"
-    [SerializeField] private string playerTag = "Player";     // Tag del vehículo
-    [SerializeField] private Image finishPanel;              // Panel que se desvanecerá al llegar a meta
-    [SerializeField] private TextMeshProUGUI textYourTime;
-    [SerializeField] private TextMeshProUGUI textBestTime; 
-    [SerializeField] private PanelPause panelPauseScript; // Referencia al script PanelPause
-    [SerializeField] private float delayPanelPause = 5f; // Segundos antes de mostrar el panel
-    [SerializeField] private CarRecorder carRecorder; 
-    [SerializeField] private CheckpointCounter checkPointCounter; 
+    [System.Serializable]
+    public class PlayerFinishUI
+    {
+        public string playerTag;                    // "Player", "Player2", "Player3", "Player4"
+        public GameObject finishMessageUI;          // Texto "Finish!" individual
+        public Image finishPanel;                   // Panel individual que se desvanecerá
+        public TextMeshProUGUI textYourTime;
+        public TextMeshProUGUI textBestTime;
+        public TextMeshProUGUI textPosition;        // "1st", "2nd", "3rd", "4th"
+        public StopwatchTimer stopwatchTimer;       // Cronómetro individual
+        public CheckpointCounter checkpointCounter; // Contador de checkpoints individual
+        public CarRecorder carRecorder;             // Grabador individual (opcional)
+    }
 
+    [Header("Players Setup")]
+    [SerializeField] private List<PlayerFinishUI> players = new List<PlayerFinishUI>();
+
+    [Header("Global Settings")]
+    [SerializeField] private PanelPause panelPauseScript;
+    [SerializeField] private float delayPanelPause = 5f;
 
     [Header("Fade Settings")]
-    [SerializeField] private float fadeDuration = 2f;         // Duración del fade
-    [SerializeField] private float targetAlpha = 0.7f;        // Alfa máximo (0 a 1)
+    [SerializeField] private float fadeDuration = 2f;
+    [SerializeField] private float targetAlpha = 0.7f;
 
     [Header("Blink Settings")]
     [SerializeField] private Color blinkColor = Color.red;
-    [SerializeField] private float duration = 2f;
-    [SerializeField] private float blinkSpeed = 0.2f; // tiempo entre cambios de color
+    [SerializeField] private float blinkDuration = 2f;
+    [SerializeField] private float blinkSpeed = 0.2f;
+
+    [Header("Position Colors")]
+    [SerializeField] private Color firstPlaceColor = Color.yellow;
+    [SerializeField] private Color secondPlaceColor = new Color(0.75f, 0.75f, 0.75f); // Plata
+    [SerializeField] private Color thirdPlaceColor = new Color(0.8f, 0.5f, 0.2f);     // Bronce
+    [SerializeField] private Color fourthPlaceColor = Color.white;
+
+    private HashSet<string> finishedPlayers = new HashSet<string>();
+    private int totalPlayers = 0;
+    private int finishPosition = 1;
 
     private void Start()
     {
-        if (finishMessageUI != null)
-            finishMessageUI.SetActive(false);
+        // Contar jugadores activos en la escena
+        CountActivePlayers();
 
-        if (textYourTime != null)
-            textYourTime.gameObject.SetActive(false);
-
-        if (textBestTime != null)
-            textBestTime.gameObject.SetActive(false);
-
-        // Asegurarse de que el panel empieza invisible
-        if (finishPanel != null)
+        // Inicializar UI de cada jugador
+        foreach (var player in players)
         {
-            Color c = finishPanel.color;
-            c.a = 0f;
-            finishPanel.color = c;
+            if (player.finishMessageUI != null)
+                player.finishMessageUI.SetActive(false);
+
+            if (player.textYourTime != null)
+                player.textYourTime.gameObject.SetActive(false);
+
+            if (player.textBestTime != null)
+                player.textBestTime.gameObject.SetActive(false);
+
+            if (player.textPosition != null)
+                player.textPosition.gameObject.SetActive(false);
+
+            if (player.finishPanel != null)
+            {
+                Color c = player.finishPanel.color;
+                c.a = 0f;
+                player.finishPanel.color = c;
+            }
         }
+    }
+
+    private void CountActivePlayers()
+    {
+        // Detectar cuántos jugadores hay en la escena
+        string[] possibleTags = { "Player", "Player2", "Player3", "Player4" };
+        totalPlayers = 0;
+
+        foreach (string tag in possibleTags)
+        {
+            GameObject player = GameObject.FindGameObjectWithTag(tag);
+            if (player != null)
+                totalPlayers++;
+        }
+
+        Debug.Log($"Jugadores detectados en la escena: {totalPlayers}");
     }
 
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag(playerTag))
+        // Buscar el jugador que ha cruzado la meta
+        PlayerFinishUI playerUI = players.FirstOrDefault(p => other.CompareTag(p.playerTag));
+
+        if (playerUI == null || finishedPlayers.Contains(playerUI.playerTag))
+            return; // Jugador no encontrado o ya ha terminado
+
+        // Verificar checkpoints
+        if (playerUI.checkpointCounter != null)
         {
-            if(checkPointCounter != null)
-            {
-                if(checkPointCounter.GetCheckpointCount() >= 3)
-                {
-                    // 1️⃣ Detener el cronómetro
-                    if (stopwatchTimer != null)
-                        stopwatchTimer.StopTimer();
+            if (playerUI.checkpointCounter.GetCheckpointCount() < 3)
+                return; // No ha pasado por todos los checkpoints
+        }
 
-                    if (carRecorder != null & stopwatchTimer != null)
-                        carRecorder.StopRecording(stopwatchTimer.GetElapsedTime());
+        // Marcar jugador como finalizado
+        finishedPlayers.Add(playerUI.playerTag);
 
-                    // 2️⃣ Detener el coche ajustando MaxSpeed a 0
-                    PrometeoCarController carController = other.GetComponent<PrometeoCarController>();
-                    if (carController != null)
-                    {
-                        carController.carSpeed = 0f;
-                        carController.enabled = false;
-                    }
+        // Procesar llegada a meta
+        ProcessPlayerFinish(playerUI, other);
 
-                    // 3️⃣ Mostrar el mensaje de "Finish"
-                    if (finishMessageUI != null)
-                        finishMessageUI.SetActive(true);
+        // Verificar si todos los jugadores han terminado
+        if (finishedPlayers.Count >= totalPlayers)
+        {
+            OnAllPlayersFinished();
+        }
+    }
 
-                    // 4️⃣ Iniciar el fade del panel
-                    if (finishPanel != null)
-                    {
-                        finishPanel.gameObject.SetActive(true);
-                        StartCoroutine(FadeInPanel(finishPanel, fadeDuration, targetAlpha));
-                    }
+    private void ProcessPlayerFinish(PlayerFinishUI playerUI, Collider playerCollider)
+    {
+        // 1️⃣ Detener el cronómetro
+        if (playerUI.stopwatchTimer != null)
+            playerUI.stopwatchTimer.StopTimer();
 
-                    // Guardar el tiempo sólo si es mejor que el ya guardado
-                    BestTimeManager.SaveBestTime(stopwatchTimer.GetElapsedTime());
+        float elapsedTime = playerUI.stopwatchTimer != null ? playerUI.stopwatchTimer.GetElapsedTime() : 0f;
 
-                    // Mostrar tu tiempo
-                    if (textYourTime != null && stopwatchTimer != null)
-                    {
-                        // Mostrar en el texto, formato mm:ss:ff (minutos:segundos:centésimas)
-                        int minutes = Mathf.FloorToInt(stopwatchTimer.GetElapsedTime() / 60f);
-                        int seconds = Mathf.FloorToInt(stopwatchTimer.GetElapsedTime() % 60f);
-                        int hundredths = Mathf.FloorToInt((stopwatchTimer.GetElapsedTime() * 100) % 100);
+        // 2️⃣ Detener el coche
+        PrometeoCarController carController = playerCollider.GetComponent<PrometeoCarController>();
+        if (carController != null)
+        {
+            carController.carSpeed = 0f;
+            carController.enabled = false;
+        }
 
-                        textYourTime.text = string.Format("Your time: {0:00}:{1:00}:{2:00}", minutes, seconds, hundredths);
+        // 3️⃣ Grabar la carrera (si aplica)
+        if (playerUI.carRecorder != null && playerUI.stopwatchTimer != null)
+            playerUI.carRecorder.StopRecording(elapsedTime);
 
-                        if (textYourTime != null)
-                            textYourTime.gameObject.SetActive(true);
-                    }
+        // 4️⃣ Mostrar mensaje "Finish!"
+        if (playerUI.finishMessageUI != null)
+            playerUI.finishMessageUI.SetActive(true);
 
-                    // Mostrar mejor tiempo
-                    if (textBestTime != null && stopwatchTimer != null)
-                    {
-                        float bestTime = BestTimeManager.GetBestTime();
+        // 5️⃣ Fade del panel
+        if (playerUI.finishPanel != null)
+        {
+            playerUI.finishPanel.gameObject.SetActive(true);
+            StartCoroutine(FadeInPanel(playerUI.finishPanel, fadeDuration, targetAlpha));
+        }
 
-                        // Verificar si hay un tiempo válido
-                        if (bestTime != float.MaxValue)
-                        {
-                            // Convertir a minutos, segundos y centésimas
-                            int minutes = Mathf.FloorToInt(bestTime / 60f);
-                            int seconds = Mathf.FloorToInt(bestTime % 60f);
-                            int hundredths = Mathf.FloorToInt((bestTime * 100) % 100);
+        // 6️⃣ Guardar mejor tiempo (solo para Player principal)
+        if (playerUI.playerTag == "Player")
+        {
+            BestTimeManager.SaveBestTime(elapsedTime);
+        }
 
-                            textBestTime.text = string.Format("Best time: {0:00}:{1:00}:{2:00}", minutes, seconds, hundredths);
+        // 7️⃣ Mostrar tiempo del jugador
+        DisplayPlayerTime(playerUI, elapsedTime);
 
-                            // Activar el texto si estaba oculto
-                            textBestTime.gameObject.SetActive(true);
+        // 8️⃣ Mostrar mejor tiempo (solo para Player principal)
+        if (playerUI.playerTag == "Player")
+        {
+            DisplayBestTime(playerUI, elapsedTime);
+        }
 
-                            // Hacer que parpadee si se ha conseguido un nuevo récord
-                            if (stopwatchTimer.GetElapsedTime() <= bestTime)
-                                StartCoroutine(BlinkCoroutine());
-                        }
-                        else
-                        {
-                            // No hay tiempo guardado todavía
-                            textBestTime.text = "Best time: --:--:--";
-                            textBestTime.gameObject.SetActive(true);
-                        }
-                    }
-                    
-                    if (panelPauseScript != null)
-                    {
-                        // Evitar que el usuario abra el menú de Pausa cuando se ha acabado la carrera
-                        panelPauseScript.canPause = false;
+        // 9️⃣ Mostrar posición
+        DisplayPosition(playerUI, finishPosition);
 
-                        // Iniciar la corutina que lo activará después del delay
-                        StartCoroutine(ActivatePausePanelAfterDelay());
-                    }
+        finishPosition++; // Incrementar para el siguiente jugador
 
-                    // Fade out de la música de fondo
-                    if (SoundManager.Instance != null)
-                        StartCoroutine(SoundManager.Instance.FadeOutMusic(fadeDuration));
+        // 🔟 Deshabilitar pausa para este jugador (solo el primero)
+        if (finishedPlayers.Count == 1 && panelPauseScript != null)
+        {
+            panelPauseScript.canPause = false;
+        }
 
-                    Debug.Log("¡Meta alcanzada! Cronómetro detenido y vehículo parado.");
-                }
-            }
+        Debug.Log($"{playerUI.playerTag} ha llegado a la meta en posición {finishPosition - 1}");
+    }
+
+    private void DisplayPlayerTime(PlayerFinishUI playerUI, float elapsedTime)
+    {
+        if (playerUI.textYourTime == null) return;
+
+        int minutes = Mathf.FloorToInt(elapsedTime / 60f);
+        int seconds = Mathf.FloorToInt(elapsedTime % 60f);
+        int hundredths = Mathf.FloorToInt((elapsedTime * 100) % 100);
+
+        playerUI.textYourTime.text = string.Format("Your time: {0:00}:{1:00}:{2:00}", minutes, seconds, hundredths);
+        playerUI.textYourTime.gameObject.SetActive(true);
+    }
+
+    private void DisplayBestTime(PlayerFinishUI playerUI, float currentTime)
+    {
+        if (playerUI.textBestTime == null) return;
+
+        float bestTime = BestTimeManager.GetBestTime();
+
+        if (bestTime != float.MaxValue)
+        {
+            int minutes = Mathf.FloorToInt(bestTime / 60f);
+            int seconds = Mathf.FloorToInt(bestTime % 60f);
+            int hundredths = Mathf.FloorToInt((bestTime * 100) % 100);
+
+            playerUI.textBestTime.text = string.Format("Best time: {0:00}:{1:00}:{2:00}", minutes, seconds, hundredths);
+            playerUI.textBestTime.gameObject.SetActive(true);
+
+            // Parpadear si es nuevo récord
+            if (currentTime <= bestTime)
+                StartCoroutine(BlinkCoroutine(playerUI.textBestTime));
+        }
+        else
+        {
+            playerUI.textBestTime.text = "Best time: --:--:--";
+            playerUI.textBestTime.gameObject.SetActive(true);
+        }
+    }
+
+    private void DisplayPosition(PlayerFinishUI playerUI, int position)
+    {
+        if (playerUI.textPosition == null) return;
+
+        string positionText = GetPositionText(position);
+        Color positionColor = GetPositionColor(position);
+
+        playerUI.textPosition.text = positionText;
+        playerUI.textPosition.color = positionColor;
+        playerUI.textPosition.gameObject.SetActive(true);
+    }
+
+    private string GetPositionText(int position)
+    {
+        switch (position)
+        {
+            case 1: return "1st Place!";
+            case 2: return "2nd Place";
+            case 3: return "3rd Place";
+            case 4: return "4th Place";
+            default: return $"{position}th Place";
+        }
+    }
+
+    private Color GetPositionColor(int position)
+    {
+        switch (position)
+        {
+            case 1: return firstPlaceColor;
+            case 2: return secondPlaceColor;
+            case 3: return thirdPlaceColor;
+            case 4: return fourthPlaceColor;
+            default: return Color.white;
+        }
+    }
+
+    private void OnAllPlayersFinished()
+    {
+        Debug.Log("¡Todos los jugadores han terminado!");
+
+        // Fade out de la música
+        if (SoundManager.Instance != null)
+            StartCoroutine(SoundManager.Instance.FadeOutMusic(fadeDuration));
+
+        // Mostrar panel de pausa después del delay
+        if (panelPauseScript != null)
+        {
+            StartCoroutine(ActivatePausePanelAfterDelay());
         }
     }
 
@@ -166,30 +288,29 @@ public class FinishLine : MonoBehaviour
         panel.color = color;
     }
 
-    private IEnumerator BlinkCoroutine()
+    private IEnumerator BlinkCoroutine(TextMeshProUGUI text)
     {
-        Color originalColor = textBestTime.color;
+        Color originalColor = text.color;
         float elapsed = 0f;
 
-        while (elapsed < duration)
+        while (elapsed < blinkDuration)
         {
-            // Alternar entre color original y color de parpadeo
-            textBestTime.color = textBestTime.color == originalColor ? blinkColor : originalColor;
-
+            text.color = text.color == originalColor ? blinkColor : originalColor;
             elapsed += blinkSpeed;
             yield return new WaitForSeconds(blinkSpeed);
         }
 
-        // Asegurarse de que el texto vuelve al color original
-        textBestTime.color = originalColor;
+        text.color = originalColor;
     }
 
     private IEnumerator ActivatePausePanelAfterDelay()
     {
         yield return new WaitForSeconds(delayPanelPause);
 
-        // Activar panel y ocultar el botón Play
-        panelPauseScript.HidePlayButton();
-        panelPauseScript.PauseGame();
+        if (panelPauseScript != null)
+        {
+            panelPauseScript.HidePlayButton();
+            panelPauseScript.PauseGame();
+        }
     }
 }

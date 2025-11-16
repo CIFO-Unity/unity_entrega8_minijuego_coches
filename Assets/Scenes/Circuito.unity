@@ -979,6 +979,42 @@ PrefabInstance:
       propertyPath: checkPointCounter
       value: 
       objectReference: {fileID: 2125572641}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.size
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].playerTag
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].carRecorder
+      value: 
+      objectReference: {fileID: 2125572647}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].finishPanel
+      value: 
+      objectReference: {fileID: 1528382423}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].textBestTime
+      value: 
+      objectReference: {fileID: 880278251}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].textYourTime
+      value: 
+      objectReference: {fileID: 1207568417}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].stopwatchTimer
+      value: 
+      objectReference: {fileID: 1685457969}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].finishMessageUI
+      value: 
+      objectReference: {fileID: 879892632}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].checkpointCounter
+      value: 
+      objectReference: {fileID: 2125572641}
     - target: {fileID: 3511962444499918126, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
