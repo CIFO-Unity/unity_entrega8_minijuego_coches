@@ -4553,9 +4553,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   stopwatchTimer: {fileID: 1685457969}
-  carControllerActivator: {fileID: 0}
+  carControllerActivator: {fileID: 1852585844}
   panelPause: {fileID: 1685457970}
-  carRecorder: {fileID: 0}
+  carRecorder: {fileID: 1852585842}
   carGhost: {fileID: 8417875695730153773}
   redLight: {fileID: 700335843}
   yellowLight: {fileID: 1473685197}
@@ -4624,7 +4624,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   carGhost: {fileID: 8417875695730153773}
-  carRecorder: {fileID: 0}
+  carRecorder: {fileID: 1852585842}
 --- !u!1 &1730173035
 GameObject:
   m_ObjectHideFlags: 0
@@ -5178,6 +5178,17 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 8067090684520149268, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
   m_PrefabInstance: {fileID: 1852585840}
   m_PrefabAsset: {fileID: 0}
+--- !u!114 &1852585844 stripped
+MonoBehaviour:
+  m_CorrespondingSourceObject: {fileID: 512978147342133860, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+  m_PrefabInstance: {fileID: 1852585840}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1852585841}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 9bf37f97aa0d9430b855e87d58f95d9e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!114 &1852585851 stripped
 MonoBehaviour:
   m_CorrespondingSourceObject: {fileID: 627556911, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
@@ -5996,7 +6007,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 487905036460102815, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 2061548465239835837, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
       propertyPath: stopper
@@ -6138,7 +6149,7 @@ MonoBehaviour:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 642287923089035806}
-  m_Enabled: 0
+  m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c73e71ba9364404aa24f1f56fb8cb01, type: 3}
   m_Name: 
