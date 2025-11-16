@@ -20,7 +20,7 @@ public class CarControllerActivator : MonoBehaviour
             else
             {
                 // Fallback: find all controllers in the scene
-                var foundInScene = FindObjectsOfType<PrometeoCarController>(true);
+                var foundInScene = FindObjectsByType<PrometeoCarController>(FindObjectsSortMode.InstanceID);
                 if (foundInScene != null && foundInScene.Length > 0)
                     carControllers = foundInScene;
             }

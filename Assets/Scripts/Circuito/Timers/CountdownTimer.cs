@@ -81,7 +81,7 @@ public class CountdownTimer : MonoBehaviour
         }
         else
         {
-            activators = FindObjectsOfType<CarControllerActivator>(true);
+            activators = FindObjectsByType<CarControllerActivator>(FindObjectsSortMode.InstanceID);
         }
 
         if (activators != null)
