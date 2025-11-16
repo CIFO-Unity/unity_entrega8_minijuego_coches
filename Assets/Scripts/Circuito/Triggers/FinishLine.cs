@@ -11,11 +11,10 @@ public class FinishLineMultiplayer : MonoBehaviour
     public class PlayerFinishUI
     {
         public string playerTag;                    // "Player", "Player2", "Player3", "Player4"
-        public GameObject finishMessageUI;          // Texto "Finish!" individual
+        public TextMeshProUGUI finishMessageUI;     // Texto para mostrar posición ("1st Place!", "2nd Place", etc.)
         public Image finishPanel;                   // Panel individual que se desvanecerá
         public TextMeshProUGUI textYourTime;
         public TextMeshProUGUI textBestTime;
-        public TextMeshProUGUI textPosition;        // "1st", "2nd", "3rd", "4th"
         public StopwatchTimer stopwatchTimer;       // Cronómetro individual
         public CheckpointCounter checkpointCounter; // Contador de checkpoints individual
         public CarRecorder carRecorder;             // Grabador individual (opcional)
@@ -56,16 +55,13 @@ public class FinishLineMultiplayer : MonoBehaviour
         foreach (var player in players)
         {
             if (player.finishMessageUI != null)
-                player.finishMessageUI.SetActive(false);
+                player.finishMessageUI.gameObject.SetActive(false);
 
             if (player.textYourTime != null)
                 player.textYourTime.gameObject.SetActive(false);
 
             if (player.textBestTime != null)
                 player.textBestTime.gameObject.SetActive(false);
-
-            if (player.textPosition != null)
-                player.textPosition.gameObject.SetActive(false);
 
             if (player.finishPanel != null)
             {
@@ -84,12 +80,22 @@ public class FinishLineMultiplayer : MonoBehaviour
 
         foreach (string tag in possibleTags)
         {
-            GameObject player = GameObject.FindGameObjectWithTag(tag);
-            if (player != null)
-                totalPlayers++;
+            try
+            {
+                GameObject player = GameObject.FindGameObjectWithTag(tag);
+                if (player != null)
+                {
+                    totalPlayers++;
+                    Debug.Log($"Jugador encontrado con tag: {tag}");
+                }
+            }
+            catch
+            {
+                // Tag no existe en el proyecto, continuar
+            }
         }
 
-        Debug.Log($"Jugadores detectados en la escena: {totalPlayers}");
+        Debug.Log($"⚠️ TOTAL JUGADORES DETECTADOS: {totalPlayers}");
     }
 
     private void OnTriggerEnter(Collider other)
@@ -122,10 +128,7 @@ public class FinishLineMultiplayer : MonoBehaviour
 
     private void ProcessPlayerFinish(PlayerFinishUI playerUI, Collider playerCollider)
     {
-        // 1️⃣ Detener el cronómetro
-        if (playerUI.stopwatchTimer != null)
-            playerUI.stopwatchTimer.StopTimer();
-
+        // 1️⃣ Obtener el tiempo actual (sin detener aún el cronómetro)
         float elapsedTime = playerUI.stopwatchTimer != null ? playerUI.stopwatchTimer.GetElapsedTime() : 0f;
 
         // 2️⃣ Detener el coche
@@ -140,9 +143,28 @@ public class FinishLineMultiplayer : MonoBehaviour
         if (playerUI.carRecorder != null && playerUI.stopwatchTimer != null)
             playerUI.carRecorder.StopRecording(elapsedTime);
 
-        // 4️⃣ Mostrar mensaje "Finish!"
+        // 4️⃣ Mostrar mensaje con posición
         if (playerUI.finishMessageUI != null)
-            playerUI.finishMessageUI.SetActive(true);
+        {
+            Debug.Log($"🎯 Mostrando posición para {playerUI.playerTag}. Total Players: {totalPlayers}, Posición: {finishPosition}");
+            
+            // Para un solo jugador, mostrar "Finish!"
+            // Para multijugador, mostrar la posición
+            if (totalPlayers == 1)
+            {
+                playerUI.finishMessageUI.text = "Finish!";
+                Debug.Log("Modo 1 jugador: mostrando 'Finish!'");
+            }
+            else
+            {
+                string positionText = GetPositionText(finishPosition);
+                Color positionColor = GetPositionColor(finishPosition);
+                playerUI.finishMessageUI.text = positionText;
+                playerUI.finishMessageUI.color = positionColor;
+                Debug.Log($"Modo multijugador: mostrando '{positionText}'");
+            }
+            playerUI.finishMessageUI.gameObject.SetActive(true);
+        }
 
         // 5️⃣ Fade del panel
         if (playerUI.finishPanel != null)
@@ -160,22 +182,10 @@ public class FinishLineMultiplayer : MonoBehaviour
         // 7️⃣ Mostrar tiempo del jugador
         DisplayPlayerTime(playerUI, elapsedTime);
 
-        // 8️⃣ Mostrar mejor tiempo (solo para Player principal)
-        if (playerUI.playerTag == "Player")
-        {
-            DisplayBestTime(playerUI, elapsedTime);
-        }
-
-        // 9️⃣ Mostrar posición
-        DisplayPosition(playerUI, finishPosition);
+        // 8️⃣ Mostrar mejor tiempo (para TODOS los jugadores)
+        DisplayBestTime(playerUI, elapsedTime);
 
         finishPosition++; // Incrementar para el siguiente jugador
-
-        // 🔟 Deshabilitar pausa para este jugador (solo el primero)
-        if (finishedPlayers.Count == 1 && panelPauseScript != null)
-        {
-            panelPauseScript.canPause = false;
-        }
 
         Debug.Log($"{playerUI.playerTag} ha llegado a la meta en posición {finishPosition - 1}");
     }
@@ -207,8 +217,8 @@ public class FinishLineMultiplayer : MonoBehaviour
             playerUI.textBestTime.text = string.Format("Best time: {0:00}:{1:00}:{2:00}", minutes, seconds, hundredths);
             playerUI.textBestTime.gameObject.SetActive(true);
 
-            // Parpadear si es nuevo récord
-            if (currentTime <= bestTime)
+            // Parpadear si es nuevo récord (solo para Player principal)
+            if (playerUI.playerTag == "Player" && currentTime <= bestTime)
                 StartCoroutine(BlinkCoroutine(playerUI.textBestTime));
         }
         else
@@ -216,18 +226,6 @@ public class FinishLineMultiplayer : MonoBehaviour
             playerUI.textBestTime.text = "Best time: --:--:--";
             playerUI.textBestTime.gameObject.SetActive(true);
         }
-    }
-
-    private void DisplayPosition(PlayerFinishUI playerUI, int position)
-    {
-        if (playerUI.textPosition == null) return;
-
-        string positionText = GetPositionText(position);
-        Color positionColor = GetPositionColor(position);
-
-        playerUI.textPosition.text = positionText;
-        playerUI.textPosition.color = positionColor;
-        playerUI.textPosition.gameObject.SetActive(true);
     }
 
     private string GetPositionText(int position)
@@ -257,6 +255,19 @@ public class FinishLineMultiplayer : MonoBehaviour
     private void OnAllPlayersFinished()
     {
         Debug.Log("¡Todos los jugadores han terminado!");
+
+        // Deshabilitar pausa cuando el último jugador termina
+        if (panelPauseScript != null)
+        {
+            panelPauseScript.canPause = false;
+        }
+
+        // Detener TODOS los cronómetros cuando el último jugador termina
+        foreach (var player in players)
+        {
+            if (player.stopwatchTimer != null)
+                player.stopwatchTimer.StopTimer();
+        }
 
         // Fade out de la música
         if (SoundManager.Instance != null)

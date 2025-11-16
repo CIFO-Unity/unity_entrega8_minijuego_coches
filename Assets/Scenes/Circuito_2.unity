@@ -295,6 +295,74 @@ PrefabInstance:
       propertyPath: checkPointCounter
       value: 
       objectReference: {fileID: 1852585854}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.size
+      value: 2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].playerTag
+      value: Player
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[1].playerTag
+      value: Player2
+      objectReference: {fileID: 0}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].carRecorder
+      value: 
+      objectReference: {fileID: 1852585842}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].finishPanel
+      value: 
+      objectReference: {fileID: 1287932920}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[1].carRecorder
+      value: 
+      objectReference: {fileID: 1883935320}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[1].finishPanel
+      value: 
+      objectReference: {fileID: 1087510907}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].textBestTime
+      value: 
+      objectReference: {fileID: 669473950}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].textYourTime
+      value: 
+      objectReference: {fileID: 2002157942}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[1].textBestTime
+      value: 
+      objectReference: {fileID: 362591263}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[1].textYourTime
+      value: 
+      objectReference: {fileID: 414284857}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].stopwatchTimer
+      value: 
+      objectReference: {fileID: 1685457969}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[1].stopwatchTimer
+      value: 
+      objectReference: {fileID: 1685457969}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].finishMessageUI
+      value: 
+      objectReference: {fileID: 509480472}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[1].finishMessageUI
+      value: 
+      objectReference: {fileID: 1759065520}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[0].checkpointCounter
+      value: 
+      objectReference: {fileID: 1852585854}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: players.Array.data[1].checkpointCounter
+      value: 
+      objectReference: {fileID: 1883935318}
     - target: {fileID: 3511962444499918126, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -342,10 +410,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 405673072895259258, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
-      insertIndex: -1
-      addedObject: {fileID: 2081356163}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
 --- !u!1 &167235110 stripped
 GameObject:
@@ -5640,38 +5705,6 @@ RectTransform:
   m_AnchoredPosition: {x: 12, y: 48}
   m_SizeDelta: {x: 100, y: 100}
   m_Pivot: {x: 0.5, y: 0.5}
---- !u!1 &2081356159 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 405673072895259258, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
-  m_PrefabInstance: {fileID: 167235109}
-  m_PrefabAsset: {fileID: 0}
---- !u!114 &2081356163
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 2081356159}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 0b273f2af8e2146eb9b81594c2b8dee4, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  stopwatchTimer: {fileID: 1685457969}
-  finishMessageUI: {fileID: 1759065518}
-  playerTag: Player2
-  finishPanel: {fileID: 1087510907}
-  textYourTime: {fileID: 414284857}
-  textBestTime: {fileID: 362591263}
-  panelPauseScript: {fileID: 1685457970}
-  delayPanelPause: 5
-  carRecorder: {fileID: 1883935320}
-  checkPointCounter: {fileID: 1883935318}
-  fadeDuration: 2
-  targetAlpha: 0.7
-  blinkColor: {r: 1, g: 0, b: 0, a: 1}
-  duration: 2
-  blinkSpeed: 0.2
 --- !u!1 &2089028032
 GameObject:
   m_ObjectHideFlags: 0
