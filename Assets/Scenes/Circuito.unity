@@ -151,6 +151,11 @@ AudioSource:
   m_CorrespondingSourceObject: {fileID: 7720560809351895854, guid: e5068d164df284d3a8ff3656675a8765, type: 3}
   m_PrefabInstance: {fileID: 4040778672494408613}
   m_PrefabAsset: {fileID: 0}
+--- !u!23 &648097374 stripped
+MeshRenderer:
+  m_CorrespondingSourceObject: {fileID: 2847525949359012301, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+  m_PrefabInstance: {fileID: 1655623745}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &700335843 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 4861505289892839717, guid: a085054cb4ec66545ae092071b74dc84, type: 3}
@@ -604,6 +609,9 @@ PrefabInstance:
     - targetCorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
       insertIndex: 6
       addedObject: {fileID: 2125572647}
+    - targetCorrespondingSourceObject: {fileID: 642287924342879162, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
+      insertIndex: -1
+      addedObject: {fileID: 2125572648}
   m_SourcePrefab: {fileID: 100100000, guid: 79d0ca8b77e301442afdb49f102e8aed, type: 3}
 --- !u!114 &1685457969 stripped
 MonoBehaviour:
@@ -684,6 +692,23 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   recordEveryXFrames: 2
+--- !u!114 &2125572648
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 1460270379}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ddbc95977e0f43b4e9d11db1aedbac4e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  carRenderer: {fileID: 648097374}
+  customAtlasFileName: AtlasUsuario
+  atlasFolder: Textures/Masks
+  loadOnStart: 1
+  showLogs: 1
 --- !u!1 &642287923089035806 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 487905036460102815, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}

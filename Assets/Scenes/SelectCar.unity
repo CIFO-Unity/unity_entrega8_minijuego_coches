@@ -221,7 +221,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   atlasTexture: {fileID: 2800000, guid: 06f2da338cefe20418895aee9b9cb732, type: 3}
-  purpleMask: {fileID: 2800000, guid: d37d9b0ec800f5545973efc779d422f0, type: 3}
+  purpleMask: {fileID: 2800000, guid: 585767e40438fd14085f77530d2d62b3, type: 3}
   maskThreshold: 0.5
   debugLogs: 1
   usePropertyBlock: 1
