@@ -709,11 +709,6 @@ MonoBehaviour:
   atlasFolder: Textures/Masks
   loadOnStart: 1
   showLogs: 1
---- !u!1 &642287923089035806 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 487905036460102815, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
-  m_PrefabInstance: {fileID: 2313199247984120401}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &2163924490315074173
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -839,22 +834,6 @@ PrefabInstance:
       propertyPath: stopper
       value: 
       objectReference: {fileID: 817389985}
-    - target: {fileID: 2799828979944754173, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
-      propertyPath: m_IsActive
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 5362235511502728187, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
-      propertyPath: m_Enabled
-      value: 1
-      objectReference: {fileID: 0}
-    - target: {fileID: 6011464773698917583, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
-      propertyPath: carEngineSound
-      value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 6011464773698917583, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
-      propertyPath: tireScreechSound
-      value: 
-      objectReference: {fileID: 0}
     - target: {fileID: 6858000000507517636, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
       propertyPath: m_LocalPosition.x
       value: 115.52
@@ -902,10 +881,7 @@ PrefabInstance:
     m_RemovedComponents: []
     m_RemovedGameObjects: []
     m_AddedGameObjects: []
-    m_AddedComponents:
-    - targetCorrespondingSourceObject: {fileID: 487905036460102815, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
-      insertIndex: 6
-      addedObject: {fileID: 8417875695730153773}
+    m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
 --- !u!1001 &4040778672494408613
 PrefabInstance:
@@ -1279,20 +1255,17 @@ PrefabInstance:
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 5625bef03b87548a886e8551ef2b5454, type: 3}
---- !u!114 &8417875695730153773
+--- !u!114 &8417875695730153773 stripped
 MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
+  m_CorrespondingSourceObject: {fileID: 592994245535887650, guid: 50f637bff4df2460283e911fd4e9a445, type: 3}
+  m_PrefabInstance: {fileID: 2313199247984120401}
   m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 642287923089035806}
+  m_GameObject: {fileID: 0}
   m_Enabled: 1
   m_EditorHideFlags: 0
   m_Script: {fileID: 11500000, guid: 9c73e71ba9364404aa24f1f56fb8cb01, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  playbackSpeed: 1
-  recordEveryXFrames: 2
 --- !u!1660057539 &9223372036854775807
 SceneRoots:
   m_ObjectHideFlags: 0
