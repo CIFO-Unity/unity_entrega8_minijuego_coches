@@ -27,6 +27,10 @@ public class FinishLineMultiplayer : MonoBehaviour
     [SerializeField] private PanelPause panelPauseScript;
     [SerializeField] private float delayPanelPause = 5f;
 
+    [Header("Particles")]
+    [Tooltip("Sistemas de partículas a activar al cruzar la meta (bengalas, cohetes, etc.)")]
+    [SerializeField] private ParticleSystem[] finishParticles;
+
     [Header("Fade Settings")]
     [SerializeField] private float fadeDuration = 2f;
     [SerializeField] private float targetAlpha = 0.7f;
@@ -115,6 +119,9 @@ public class FinishLineMultiplayer : MonoBehaviour
 
         // Marcar jugador como finalizado
         finishedPlayers.Add(playerUI.playerTag);
+
+        // Activar partículas de bengalas(busca las particulas del inspector atachadas)
+        ActivateFinishParticles();
 
         // Procesar llegada a meta
         ProcessPlayerFinish(playerUI, other);
@@ -322,6 +329,22 @@ public class FinishLineMultiplayer : MonoBehaviour
         {
             panelPauseScript.HidePlayButton();
             panelPauseScript.PauseGame();
+        }
+    }
+
+    private void ActivateFinishParticles()
+    {
+        if (finishParticles != null && finishParticles.Length > 0)
+        {
+            // Activar todas las partículas asignadas (bengalas, cohetes, etc.)
+            foreach (var ps in finishParticles)
+            {
+                if (ps != null)
+                {
+                    ps.Play();
+                }
+            }
+            Debug.Log($"Activadas {finishParticles.Length} partículas de celebración.");
         }
     }
 }
