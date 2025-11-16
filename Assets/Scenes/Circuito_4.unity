@@ -8788,6 +8788,10 @@ PrefabInstance:
     m_TransformParent: {fileID: 0}
     m_Modifications:
     - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
+      propertyPath: panelPauseScript
+      value: 
+      objectReference: {fileID: 1685457970}
+    - target: {fileID: 1849388009223048640, guid: 2685a993f11ab455086c2e1546fd67b7, type: 3}
       propertyPath: players.Array.size
       value: 4
       objectReference: {fileID: 0}
