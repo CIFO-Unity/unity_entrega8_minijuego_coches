@@ -30,8 +30,8 @@ def ensure_parent_dir(path):
 
 
 def generate_mask(input_path, mask_output_path, key_rgb, tolerance=0.12):
-    """Genera una máscara PNG donde los píxeles cercanos a `key_rgb` quedan blancos (alpha=255),
-    y el resto transparentes. Esta máscara se guarda y puede reutilizarse.
+    """Genera una máscara PNG donde los píxeles cercanos a `key_rgb` quedan blancos puros (255,255,255,255),
+    y el resto negros puros (0,0,0,255). Sin grises intermedios para evitar problemas de interpolación.
 
     - `key_rgb`: tupla (r,g,b) 0-255
     - `tolerance`: valor entre 0..1 (0 exacto, 1 cualquier píxel)
@@ -42,7 +42,7 @@ def generate_mask(input_path, mask_output_path, key_rgb, tolerance=0.12):
     px = img.load()
     w, h = img.size
 
-    mask = Image.new('RGBA', (w, h), (0, 0, 0, 0))
+    mask = Image.new('RGB', (w, h), (0, 0, 0))  # Fondo negro RGB
     mpx = mask.load()
 
     matched = 0
@@ -56,10 +56,10 @@ def generate_mask(input_path, mask_output_path, key_rgb, tolerance=0.12):
             min_d = min(min_d, d)
             max_d = max(max_d, d)
             if d <= tolerance:
-                mpx[x, y] = (255, 255, 255, 255)  # Blanco = área a pintar
+                mpx[x, y] = (255, 255, 255)  # Blanco PURO = área a pintar
                 matched += 1
             else:
-                mpx[x, y] = (0, 0, 0, 0)  # Transparente = no pintar
+                mpx[x, y] = (0, 0, 0)  # Negro PURO = no pintar
 
     ensure_parent_dir(mask_output_path)
     mask.save(mask_output_path, format='PNG')
@@ -103,12 +103,12 @@ def apply_mask_to_image(atlas_path, mask_path, output_path, paint_rgb):
     """Aplica una máscara previamente guardada a un atlas, pintando las regiones marcadas.
     
     - atlas_path: imagen original
-    - mask_path: máscara (blanco = pintar, transparente/negro = no pintar)
+    - mask_path: máscara (blanco RGB puro = pintar, negro = no pintar)
     - output_path: resultado con color aplicado
     - paint_rgb: tupla (r,g,b) del color a aplicar
     """
     atlas = Image.open(atlas_path).convert('RGBA')
-    mask = Image.open(mask_path).convert('RGBA')
+    mask = Image.open(mask_path).convert('RGB')
     
     if atlas.size != mask.size:
         raise ValueError(f"Atlas y máscara tienen tamaños diferentes: {atlas.size} vs {mask.size}")
@@ -120,9 +120,9 @@ def apply_mask_to_image(atlas_path, mask_path, output_path, paint_rgb):
     painted = 0
     for y in range(h):
         for x in range(w):
-            mr, mg, mb, ma = mpx[x, y]
-            # Si el píxel de la máscara es blanco (255) o tiene alpha > 128, pintamos
-            if mr > 128 or ma > 128:
+            mr, mg, mb = mpx[x, y]
+            # Si el píxel de la máscara es blanco puro (255,255,255), pintamos
+            if mr >= 250 and mg >= 250 and mb >= 250:
                 r, g, b, a = apx[x, y]
                 apx[x, y] = (paint_rgb[0], paint_rgb[1], paint_rgb[2], a)
                 painted += 1
@@ -202,3 +202,7 @@ Ejemplos de uso:
 
 if __name__ == '__main__':
     main()
+
+#El primer archivo es el original atlas con el purpura que queremos mapear y se genera la máscara (unicamente la zona purpura).
+#D:\Documentos\Unity\CIFO\Programas\unity_entrega8_minijuego_coches> 
+#python Tools\map_purple.py "D:\Documentos\Python\Textures\Origin7.png" "D:\Documentos\Python\Textures\pcc_mask_purpura7.png" --tolerance 0.12

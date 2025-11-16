@@ -19,7 +19,8 @@ public class AtlasColorMask : MonoBehaviour
     private Texture2D runtimeAtlas;
 
     // umbral para considerar un píxel de máscara como 'activo' (0..1)
-    public float maskThreshold = 0.5f;
+    // Valores altos (0.95) = solo píxeles blancos puros, valores bajos (0.5) = incluye grises
+    public float maskThreshold = 0.95f;
 
     void Awake()
     {
@@ -137,8 +138,16 @@ public class AtlasColorMask : MonoBehaviour
         int w = runtimeAtlas.width;
         int h = runtimeAtlas.height;
 
+        Debug.Log($"PaintRegionByMask: atlas={w}x{h}, mask={mask.width}x{mask.height}, threshold={maskThreshold}, paintColor={FormatColor(paintColor)}");
+
         Color[] src = runtimeAtlas.GetPixels();
         Color[] dst = new Color[src.Length];
+
+        int paintedCount = 0;
+        float minBrightness = 1f;
+        float maxBrightness = 0f;
+        float minAlpha = 1f;
+        float maxAlpha = 0f;
 
         for (int y = 0; y < h; y++)
         {
@@ -148,11 +157,31 @@ public class AtlasColorMask : MonoBehaviour
                 float u = (x + 0.5f) / (float)w;
                 float v = (y + 0.5f) / (float)h;
 
-                Color maskC = mask.GetPixelBilinear(u, v);
-                float maskVal = maskC.a; // asume máscara en canal alfa
-                if (maskVal >= maskThreshold || maskC.grayscale >= maskThreshold)
+                Color maskC;
+                // Si la máscara tiene el mismo tamaño, usar GetPixel directo (sin interpolación)
+                if (mask.width == w && mask.height == h)
+                {
+                    maskC = mask.GetPixel(x, y);
+                }
+                else
+                {
+                    // Si diferente tamaño, usar bilinear
+                    maskC = mask.GetPixelBilinear(u, v);
+                }
+                
+                // Verificar si el píxel de la máscara es blanco
+                // Comprobar SOLO RGB (blanco puro = 255,255,255)
+                // No usar alpha porque la máscara RGB tiene alpha=1 en todos los píxeles
+                float brightness = Mathf.Max(maskC.r, maskC.g, maskC.b);
+                minBrightness = Mathf.Min(minBrightness, brightness);
+                maxBrightness = Mathf.Max(maxBrightness, brightness);
+                minAlpha = Mathf.Min(minAlpha, maskC.a);
+                maxAlpha = Mathf.Max(maxAlpha, maskC.a);
+
+                if (brightness >= maskThreshold)
                 {
                     dst[idx] = BlendPixel(src[idx], paintColor, blendMode);
+                    paintedCount++;
                 }
                 else
                 {
@@ -163,6 +192,10 @@ public class AtlasColorMask : MonoBehaviour
 
         runtimeAtlas.SetPixels(dst);
         runtimeAtlas.Apply();
+
+        Debug.Log($"PaintRegionByMask: pintados={paintedCount}/{w*h} ({100f*paintedCount/(w*h):F2}%)");
+        Debug.Log($"  brightness range: [{minBrightness:F3}, {maxBrightness:F3}]");
+        Debug.Log($"  alpha range: [{minAlpha:F3}, {maxAlpha:F3}]");
     }
 
     /// <summary>

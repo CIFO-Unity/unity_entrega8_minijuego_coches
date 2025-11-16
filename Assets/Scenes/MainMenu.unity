@@ -252,7 +252,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: af33bb5cfefa740048789e2f70005e11, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  buttonCircuito: {fileID: 1941755443}
+  buttonSelectCar: {fileID: 1941755443}
+  buttonCircuito: {fileID: 0}
   buttonCircuito2P: {fileID: 803197255}
   buttonCircuito4P: {fileID: 1041772610}
   fadeDuration: 1.5

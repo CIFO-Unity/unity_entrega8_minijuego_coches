@@ -6,17 +6,24 @@ using System.Collections;
 public class MainMenuController : MonoBehaviour
 {
     [Header("Botones")]
+
+    [SerializeField] private Button buttonSelectCar;
     [SerializeField] private Button buttonCircuito;
     [SerializeField] private Button buttonCircuito2P;
     [SerializeField] private Button buttonCircuito4P;
+
+    
 
     [Header("Fade Settings")]
     [SerializeField] private float fadeDuration = 1.5f; // duración del fade de música
 
     void Start()
     {
+        if (buttonSelectCar != null)
+            buttonSelectCar.onClick.AddListener(() => StartCoroutine(LoadSceneWithFade("SelectCar")));
+
         if (buttonCircuito != null)
-            buttonCircuito.onClick.AddListener(() => StartCoroutine(LoadSceneWithFade("Circuito")));
+            buttonCircuito.onClick.AddListener(() => StartCoroutine(LoadSceneWithFade("Circuito")));    
 
         if (buttonCircuito2P != null)
             buttonCircuito2P.onClick.AddListener(() => StartCoroutine(LoadSceneWithFade("Circuito_2")));
