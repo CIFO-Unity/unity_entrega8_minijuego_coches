@@ -344,7 +344,6 @@ public class FinishLineMultiplayer : MonoBehaviour
                     ps.Play();
                 }
             }
-            Debug.Log($"Activadas {finishParticles.Length} partículas de celebración.");
         }
     }
 }
