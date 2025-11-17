@@ -75,7 +75,7 @@ public class LoadCustomAtlas : MonoBehaviour
                 
                 // Aplicar a todos los materiales del renderer
                 Material[] materials = carRenderer.materials;
-                bool applied = false;
+                //bool applied = false;
 
                 foreach (var mat in materials)
                 {
@@ -85,12 +85,12 @@ public class LoadCustomAtlas : MonoBehaviour
                     if (mat.HasProperty("_MainTex"))
                     {
                         mat.SetTexture("_MainTex", customTexture);
-                        applied = true;
+                        //applied = true;
                     }
                     if (mat.HasProperty("_BaseMap"))
                     {
                         mat.SetTexture("_BaseMap", customTexture);
-                        applied = true;
+                        //applied = true;
                     }
 
                     // Resetear color del material a blanco para evitar tintados
